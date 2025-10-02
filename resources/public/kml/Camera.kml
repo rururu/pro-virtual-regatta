@@ -1,0 +1,29 @@
+<kml xmlns="http://www.opengis.net/kml/2.2"
+  xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+	<Camera>
+	<longitude>-6.246424370277099</longitude>
+	<latitude>48.811138349642334</latitude>
+	<range>100</range>
+	<tilt>80</tilt>
+	<altitude>10</altitude>
+	<heading>124</heading>
+	<altitudeMode>absolute</altitudeMode>
+	</Camera>
+	<Style id="1">
+	  <IconStyle>
+	    <Icon>
+	     <href>img/sailing.png</href>
+	    </Icon>
+	  </IconStyle>
+	</Style>
+	<Placemark>
+	  <styleUrl>#1</styleUrl>
+	  <name>russor</name>
+	  <description>On board of boat in Race</description>
+	  <Point>
+		<coordinates>-6.246424370277099,48.811138349642334,0</coordinates>
+	  </Point>
+	</Placemark>
+  </Document>
+</kml>

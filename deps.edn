@@ -1,0 +1,31 @@
+{:deps
+ {org.clojure/clojure {:mvn/version "1.12.1"}
+  protege/protege {:local/root "lib_pro/protege-3.5.0.jar"}
+  protege/standard-extensions {:local/root "lib_pro/standard-extensions-3.5.0.jar"}
+  protege/looks {:local/root "lib_pro/looks-3.5.0.jar"}
+  protege/unicode_panel {:local/root "lib_pro/unicode_panel-3.5.0.jar"}
+  protege/JGo {:local/root "lib_pro/JGo-3.5.0.jar"}
+  protege/JGoLayout {:local/root "lib_pro/JGoLayout-3.5.0.jar"}
+  protege/ProtegeExtensions {:local/root "lib_pro/ProtegeExtensions.jar"}
+  protege/ClojureTab {:local/root "lib/ClojureTab-1.5.jar"}
+  OpenMapTab/OpenMapTab {:local/root "lib/OpenMapTab-5.2.1.jar"}
+  OMTExtensions/OMTExtensions {:local/root "lib/OMTExtensions.jar"}
+  ScenaSupport/ScenaSupport {:local/root "lib/ScenaSupport.jar"}  
+  org.openmap-java/openmap {:local/root "lib_ext/openmap-5.1.15.jar"}
+  rete/rete {:mvn/version "5.3.0-SNAPSHOT"}
+  ring/ring-core {:mvn/version "1.14.2"}
+  ring/ring-jetty-adapter {:mvn/version "1.14.2"}
+  ring/ring-defaults {:mvn/version "0.7.0"}
+  compojure/compojure {:mvn/version "1.7.1"}
+  org.clojure/core.async {:mvn/version "1.8.741"}
+  clj-json/clj-json {:mvn/version "0.5.3"}
+  clj-time/clj-time {:mvn/version "0.15.0"}
+  org.clojure/data.csv {:mvn/version "1.1.0"}
+  GeographicLib/GeographicLib {:local/root "lib_ext/GeographicLib-Java-1.42.jar"}
+  http-kit/http-kit {:mvn/version "2.8.1"}
+  VRDnmea/VRDnmea {:local/root "lib/VRDnmea.jar"}
+  AisMessages/AisMessages {:local/root "lib/AisMessages.jar"}
+  AisLibMessages/AisLibMessages {:local/root "lib_ext/AisLibMessages.jar"}
+  enav-model/enav-model {:local/root "lib_ext/enav-model.jar"}}
+ :paths ["src" "src/clojure" "classes" "resources"]}
+

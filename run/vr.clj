@@ -1,0 +1,5 @@
+(edu.stanford.smi.protege.Application/main (into-array String ["pprj_examples/VirtualRegatta.pprj"]))
+(edu.stanford.smi.protege.action.FontActionRu/changeSize 4)
+(Thread/sleep 1000)
+(load-file "src/clojure/menu/item.clj")
+(menu.item/clojure-work)

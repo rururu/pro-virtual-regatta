@@ -1,0 +1,707 @@
+; Fri Sep 26 22:45:23 MSK 2025
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([VirtualRegatta_Class0] of  Openmap
+
+	(components
+		[igis_Class2]
+		[igis_Class3]
+		[igis_Class4]
+		[igis_Class12]
+		[igis_Class40000]
+		[igis_Class40001]
+		[igis_Class70000]
+		[igis_Class14]
+		[igis_Class15]
+		[igis_Class16]
+		[igis_Class17]
+		[igis_Class18]
+		[igis_Class19]
+		[igis_Class20]
+		[igis_Class21]
+		[igis_Class22]
+		[igis_Class23]
+		[igis_Class25]
+		[igis_Class26]
+		[igis_Class27]
+		[igis_Class28]
+		[igis_Class29]
+		[igis_Class30]
+		[VirtualRegatta_Class180000])
+	(Debug "FINE")
+	(label "Virtual Regatta Map")
+	(Latitude "46.50")
+	(layers
+		[igis_Class40012]
+		[igis_Class1]
+		[igis_Class40011]
+		[igis_Class40010])
+	(Longitude "-1.77")
+	(Scale "40000000")
+	(startUpLayers
+		[igis_Class40012]
+		[igis_Class1]
+		[igis_Class40011]))
+
+([VirtualRegatta_Class1] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VirtualRegatta_Class0])
+	(%3AANNOTATION-TEXT "VR")
+	(%3ACREATION-TIMESTAMP "2025.08.26 21:43:05.522 MSK")
+	(%3ACREATOR "ru"))
+
+([VirtualRegatta_Class10000] of  CloProgram
+
+	(cloFunctions
+		[VirtualRegatta_Class50003]
+		[VirtualRegatta_Class50002]
+		[VirtualRegatta_Class50005]
+		[VirtualRegatta_Class100002]
+		[VirtualRegatta_Class50001]
+		[VirtualRegatta_Class40000]
+		[VirtualRegatta_Class210004]
+		[VirtualRegatta_Class20000]
+		[VirtualRegatta_Class10002]
+		[VirtualRegatta_Class170001]
+		[VirtualRegatta_Class130001]
+		[VirtualRegatta_Class100001]
+		[VirtualRegatta_Class110000]
+		[VirtualRegatta_Class90025]
+		[VirtualRegatta_Class220012]
+		[VirtualRegatta_Class70025]
+		[VirtualRegatta_Class60000]
+		[VirtualRegatta_Class200011]
+		[VirtualRegatta_Class200024]
+		[VirtualRegatta_Class240025]
+		[VirtualRegatta_Class130000])
+	(cloNamespace [VirtualRegatta_Class10001])
+	(cloVars
+		[VirtualRegatta_Class140001]
+		[VirtualRegatta_Class50000]
+		[VirtualRegatta_Class50004]
+		[VirtualRegatta_Class100000]
+		[VirtualRegatta_Class90034])
+	(title "NMEA Server"))
+
+([VirtualRegatta_Class100000] of  CloVar
+
+	(source "8081")
+	(title "PORT"))
+
+([VirtualRegatta_Class100001] of  CloFunction
+
+	(source "(doseq [[imo bmp] flmp]\n  (let [[lat lon]  (bmp 'pos)\n          name  (bmp 'name) \n          crs (int (/ (bmp 'cog) 10))\n          spd (round-sog (bmp 'sog))]\n    (create-or-update-mo name lat lon crs spd)\n    (rete/assert-frame ['BOAT \n      'name name\n      'lat lat\n      'lon lon\n      'crs crs\n      'spd spd\n      'time time\n      'imo imo])))")
+	(title "assert-fleet-boats [flmp time]"))
+
+([VirtualRegatta_Class100002] of  CloFunction
+
+	(source "(float (/ sog 10))")
+	(title "round-sog [sog]"))
+
+([VirtualRegatta_Class100003] of  Run
+
+	(butt-ass-inss "Assert Instances/ru.rules/ass-inss")
+	(butt-fire "Fire/ru.rules/fire-all-rules")
+	(butt-retr-inss "Retract Instances/ru.rules/retr-inss")
+	(butt-run "Run/ru.rules/run-engine")
+	(butt-step "Step/ru.rules/step-engine")
+	(facts [VirtualRegatta_Class200008])
+	(mode run)
+	(rule-sets [VirtualRegatta_Class100010])
+	(steps 1)
+	(title "VRRun"))
+
+([VirtualRegatta_Class100004] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VirtualRegatta_Class100003])
+	(%3AANNOTATION-TEXT "VR")
+	(%3ACREATION-TIMESTAMP "2025.08.29 14:39:15.793 MSK")
+	(%3ACREATOR "ru"))
+
+([VirtualRegatta_Class100005] of  CloFuncall
+
+	(source "(in-ns 'nmea.server)"))
+
+([VirtualRegatta_Class100009] of  CloFuncall
+
+	(source "@FLEET"))
+
+([VirtualRegatta_Class10001] of  CloNamespace
+
+	(source "(:use\n  protege.core)\n(:require \n  [org.httpkit.server :as http]\n  [compojure.core :refer [defroutes GET POST]]\n  [compojure.route :refer [files not-found]]\n  [compojure.handler :refer [site]]\n  [ring.util.response :as resp]\n  [clojure.java.io :as io]\n  [rete.core :as rete]\n  [ru.rules :as rr]\n  [kml.genvr :as kml])\n(:import\n  java.net.URL\n  javax.swing.ImageIcon\n  ru.igis.omtab.OpenMapTab\n  ru.igis.omtab.OMT\n  ru.igis.omtab.MapOb\n  ru.igis.omtab.Util\n  ru.igis.omtab.ext.RosetteHandler\n  ru.igis.omtab.ext.SpinnerHandler\n  ru.igis.omtab.ext.AddonListener\n  dk.dma.ais.sentence.Vdm\n  dk.dma.ais.message.AisMessage\n  ru.igis.ais.AIVDMProcessor\n  ru.vrd.nmea.VRdNMEAReciever\n  edu.stanford.smi.protege.ui.DisplayUtilities)")
+	(title "nmea.server"))
+
+([VirtualRegatta_Class100010] of  RuleSet
+
+	(rules
+		[VirtualRegatta_Class60012]
+		[VirtualRegatta_Class60008]
+		[VirtualRegatta_Class100011]
+		[VirtualRegatta_Class170002]
+		[VirtualRegatta_Class130002]
+		[VirtualRegatta_Class150001]
+		[VirtualRegatta_Class150000]
+		[VirtualRegatta_Class190005])
+	(templates
+		[Clock]
+		[BOAT]
+		[MYBOAT]
+		[VRControl])
+	(title "VRRuleSet"))
+
+([VirtualRegatta_Class100011] of  Rule
+
+	(lhs "(VRControl status \"RUN\"\n	instance ?ins\n	myboat-interval ?mbi)\n(Clock sec ?s (= (mod ?s ?mbi) 0))")
+	(rhs ";(println 6)\n(nmea.server/assert-my-boat @nmea.server/MYBOAT ?s)")
+	(salience 0)
+	(title "MYBOAT-Info"))
+
+([VirtualRegatta_Class10002] of  CloFunction
+
+	(source "([]\n  (if (not SERVER-RUN)\n    (run-server PORT)))\n([port]\n  (println \"Starting HTTP server on port\" port \"..\")\n  (http/run-server handler {:port port})\n  (def SERVER-RUN true))")
+	(title "run-server"))
+
+([VirtualRegatta_Class100021] of  CloFunction
+
+	(source "(str \"\\\"\" x \"\\\"\")")
+	(title "iq [x]"))
+
+([VirtualRegatta_Class110000] of  CloFunction
+
+	(source "(let [[vrt lat lon spd crs date :as bot] boat]\n  (when (> (count bot) 2)\n    (rete/assert-frame ['MYBOAT \n      'lat lat\n      'lon lon\n      'crs (int crs)\n      'spd spd\n      'date date\n      'time sec])))")
+	(title "assert-my-boat [boat sec]"))
+
+([VirtualRegatta_Class110002] of  CloFuncall
+
+	(source "@MYBOAT"))
+
+([VirtualRegatta_Class120000] of  CloFuncall
+
+	(source "(ru.igis.omtab.ext.RosetteTest (into-array String []))"))
+
+([VirtualRegatta_Class120001] of  CloFuncall
+
+	(source "(ru.igis.omtab.OMT/setTimerRunning​ false)"))
+
+([VirtualRegatta_Class120005] of  CloFuncall
+
+	(source "(filter-facts [['instance = \":?\"]])"))
+
+([VirtualRegatta_Class130000] of  CloFunction
+
+	(source "(if-let [cmp (get-camera-panel)]\n  (let [rosh (proxy [RosetteHandler] []\n                      (rosetteDirection [dir]\n                        (ssv ins \"camera-heading\" dir)\n                        dir))\n           spih (proxy [SpinnerHandler] []\n                      (spinnerValue [ttt val]\n                        (condp = ttt\n                          \"heading\" (ssv ins \"camera-heading\" val)\n                          \"altitude\" (ssv ins \"camera-altitude\" val)\n                          \"altitude power\" (ssv ins \"cam-alt-power\" val)\n                          \"tilt\" (ssv ins \"camera-tilt\" val)\n                          \"range\" (ssv ins \"camera-range\" val))\n                       (rr/modify-instances [ins])\n                        val))\n           addh (proxy [AddonListener] []\n                        (actionPerformed [evt]\n                          (condp = (.getActionCommand evt)\n                            \"start\" (rr/start-stop-clock nil nil)\n                            \"stop\" (rr/start-stop-clock nil nil)\n                            \"action\" (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n                                               (go-onboard nil vrc)))))]\n    (.setRosetteHandler cmp rosh)\n    (.setSpinnerHandler cmp spih)\n    (.setAddonListener cmp addh)\n    (println \"Camera Control started..\"))\n  (println \"CameraPanel not found!\"))")
+	(title "start-camera-control [ins]"))
+
+([VirtualRegatta_Class130001] of  CloFunction
+
+	(source "(let [moi (or (fifos \"FLEET\" \"label\" name)\n                   (let [ins (shallow-copy (fifos \"NavOb\" \"label\" \"yg\"))]\n                     (ssv ins \"label\" name)\n                     (change-cls ins \"FLEET\")\n                     ins))\n         mo (OMT/getOrAdd moi)]\n  (.setLatitude mo (double lat))\n  (.setLongitude mo (double lon))\n  (.setCourse mo (int crs))\n  (.setSpeed mo (double spd)))")
+	(title "create-or-update-mo [name lat lon crs spd]"))
+
+([VirtualRegatta_Class130002] of  Rule
+
+	(lhs "?b1 (BOAT name ?n time ?t1)\n?b2 (BOAT name ?n\n	lat ?lat\n	lon ?lon \n	crs ?crs\n	spd ?spd\n	time ?t2 (> ?t2 ?t1))")
+	(rhs ";(println 8)\n(retract ?b1)\n(nmea.server/update-mo ?n ?lat ?lon ?crs ?spd)")
+	(salience 0)
+	(title "Update-Boat-MapOb"))
+
+([VirtualRegatta_Class140000] of  CloProgram
+
+	(cloFunctions
+		[VirtualRegatta_Class70011]
+		[VirtualRegatta_Class70012]
+		[VirtualRegatta_Class70013]
+		[VirtualRegatta_Class70024])
+	(cloNamespace [VirtualRegatta_Class160001])
+	(cloVars
+		[VirtualRegatta_Class70005]
+		[VirtualRegatta_Class70000]
+		[VirtualRegatta_Class70001]
+		[VirtualRegatta_Class70002]
+		[VirtualRegatta_Class70003]
+		[VirtualRegatta_Class200006])
+	(title "KML Generation"))
+
+([VirtualRegatta_Class140001] of  CloVar
+
+	(source "(defonce SERVER-RUN false)")
+	(title "defonce-SERVER-RUN"))
+
+([VirtualRegatta_Class150000] of  Rule
+
+	(lhs "?vrc (VRControl status \"START\"\n	instance ?ins)\n(Clock sec ?s (> ?s 5))")
+	(rhs ";(println 7)\n(println \"Start NMEA server..\")\n(nmea.server/run-server)\n(nmea.server/modify-status ?ins \"CONNVR\")")
+	(salience 0)
+	(title "Start-Server"))
+
+([VirtualRegatta_Class150001] of  Rule
+
+	(lhs "?vrc (VRControl status \"CONNVR\"\n	instance ?ins)\n(Clock sec ?s)")
+	(rhs ";(println 1)\n(if (= (mod ?s 20) 0)\n  (println \"Waiting for VR data..\"))\n(when (not= @nmea.server/MYBOAT [nil nil])\n  (nmea.server/modify-status ?ins \"INIT\"))")
+	(salience 0)
+	(title "Connect-to-VR"))
+
+([VirtualRegatta_Class160000] of  CloFuncall
+
+	(source "(start-camera-control)"))
+
+([VirtualRegatta_Class160001] of  CloNamespace
+
+	(source "(:require\n  [clojure.java.io :as io]\n  [rete.core :as rete]\n  [ru.rules :as rr])\n(:import\n  ru.igis.omtab.OMT\n  ru.igis.omtab.Util)")
+	(title "kml.genvr"))
+
+([VirtualRegatta_Class170000] of  Openmap
+
+	(components
+		[VirtualRegatta_Class200001]
+		[igis_Class29]
+		[igis_Class11]
+		[igis_Class12]
+		[igis_Class28]
+		[VirtualRegatta_Class180000])
+	(label "Test Map")
+	(Latitude "60")
+	(Longitude "30")
+	(Scale "10000000"))
+
+([VirtualRegatta_Class170001] of  CloFunction
+
+	(source "(ssv ins \"status\" sts)\n(rr/modify-instances [ins])")
+	(title "modify-status [ins sts]"))
+
+([VirtualRegatta_Class170002] of  Rule
+
+	(lhs "?vrc (VRControl status \"INIT\"\n	myboat-name ?mbn\n	instance ?ins)")
+	(rhs ";(println 5)\n(println \"Initilisation..\")\n(protege.core/clear-cls \"FLEET\")\n(protege.core/ssv ?ins \"onboard-boat\" ?mbn)\n(ru.igis.omtab.OMT/setTimerRunning true)\n(nmea.server/set-mo-image ?mbn (nmea.server/IMG-URL \"ONB\"))\n(nmea.server/modify-status ?ins \"RUN\")")
+	(salience 0)
+	(title "Initialisation"))
+
+([VirtualRegatta_Class180000] of  SimpleComponent
+
+	(class "ru.igis.omtab.ext.CameraPanel")
+	(label "CameraPanel"))
+
+([VirtualRegatta_Class180001] of  CloFuncall
+
+	(source "(start-camera-panel)"))
+
+([VirtualRegatta_Class190000] of  CloFuncall
+
+	(source "(OpenMapTab/getMapBean)"))
+
+([VirtualRegatta_Class190005] of  Rule
+
+	(lhs "(VRControl camera-heading ?hdg\n	camera-altitude ?alt\n	cam-alt-power ?apw\n	camera-tilt ?tilt\n	camera-range ?rng\n	onboard-boat ?onb)")
+	(rhs "(let [oob  (@kml.genvr/CAMERA :onboard)]\n  (when (not= ?onb oob)\n    (if (not (empty? oob))\n      (nmea.server/set-mo-image oob (nmea.server/IMG-URL \"NOB\")))\n    (nmea.server/set-mo-image ?onb (nmea.server/IMG-URL \"ONB\"))))\n(vswap! kml.genvr/CAMERA\n  assoc\n  :heading ?hdg\n  :altitude ?alt\n  :alt-power ?apw\n  :tilt ?tilt\n  :range ?rng\n  :onboard ?onb)")
+	(salience 0)
+	(title "Camera-control"))
+
+([VirtualRegatta_Class20000] of  CloFunction
+
+	(source "(cond \n  (clojure.string/starts-with? (:uri req) \"/file:\") \n    (static-file-handler req)\n  (= (:request-method req) :post)\n    (let [race-id (-> req :uri (subs 6 9) Integer/parseInt)\n            body (slurp (:body req))]\n        ;;(ctpl (str :BODY \" \" body))\n        ;;(ctpl (str :RACE \" \" race-id))\n        (cond \n          (.startsWith body \"!AIVDM\") (parse-AIVDM body)\n          (.startsWith body \"$GPRMC\") (parse-GPRMC body))\n        {:status 204\n         :headers {\"Access-Control-Allow-Origin\" \"*\"}})\n  (= (:request-method req) :get)\n     {:status 200\n      :headers {\"Access-Control-Allow-Origin\" \"*\"\n                         \"Content-type\" \"text/kml\"}\n      :body (cond \n                    (= (:uri req) \"/camera\")\n                      (kml/create-onboard-kml)\n                    (= (:uri req) \"/fleet\")\n                      (kml/create-fleet-kml))})")
+	(title "handler [req]"))
+
+([VirtualRegatta_Class200001] of  SimpleComponent
+
+	(class "com.bbn.openmap.gui.NavigatePanel")
+	(label "NavPanel"))
+
+([VirtualRegatta_Class200006] of  CloVar
+
+	(source "(volatile! {\n  :heading 0\n  :altitude 10\n  :alt-power 0\n  :tilt 80\n  :range 100\n  :onboard \"\"})")
+	(title "CAMERA"))
+
+([VirtualRegatta_Class200008] of  VRControl
+
+	(cam-alt-power 0)
+	(camera-altitude 5)
+	(camera-heading 48)
+	(camera-range 21)
+	(camera-tilt 90)
+	(fleet-interval 120)
+	(myboat-interval 4)
+	(myboat-name "russor")
+	(onboard-boat "TIPAPACHERI BSP")
+	(status "RUN")
+	(title "VR Plugin Control"))
+
+([VirtualRegatta_Class200009] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VirtualRegatta_Class200008])
+	(%3AANNOTATION-TEXT "VR")
+	(%3ACREATION-TIMESTAMP "2025.09.17 11:40:07.610 MSK")
+	(%3ACREATOR "ru"))
+
+([VirtualRegatta_Class200011] of  CloFunction
+
+	(source "(if-let [esi (fainst (cls-instances \"Run\") \"VR\")]\n  (rr/run-engine esi))")
+	(title "run-es [hm inst]"))
+
+([VirtualRegatta_Class200024] of  CloFunction
+
+	(source "(rr/modify-instances [inst])")
+	(title "refresh-camera [hm inst]"))
+
+([VirtualRegatta_Class210001] of  CloFuncall
+)
+
+([VirtualRegatta_Class210002] of  CloFunction
+
+	(source "(ru.igis.omtab.ext.RosettePanel/main)")
+	(title "RosettePanel []"))
+
+([VirtualRegatta_Class210004] of  CloFunction
+
+	(source "(let [uri (:uri req)\n        file-path (str (.substring uri 6))\n        file (io/file file-path)]\n    (if (.exists file)\n      (resp/file-response file-path)\n      (resp/not-found \"Not Found\")))")
+	(title "static-file-handler [req]"))
+
+([VirtualRegatta_Class220001] of  CloFuncall
+
+	(source "(def mb (OpenMapTab/getMapBean))"))
+
+([VirtualRegatta_Class220002] of  CloFuncall
+
+	(source "(.getComponents mb)"))
+
+([VirtualRegatta_Class220003] of  CloFuncall
+
+	(source "(vec (.getComponents mb))"))
+
+([VirtualRegatta_Class220012] of  CloFunction
+
+	(source "(if-let [mo (OMT/getMapOb lab)]\n  (let [url (URL. url)\n          imi (ImageIcon. url)\n          lm (.getLocationMarker mo)]\n    (.setImageIcon lm imi)))")
+	(title "set-mo-image [lab url]"))
+
+([VirtualRegatta_Class230004] of  CloFuncall
+
+	(source "(def props (OpenMapTab/getProperties))"))
+
+([VirtualRegatta_Class230005] of  CloFuncall
+
+	(source "props"))
+
+([VirtualRegatta_Class240006] of  CloFuncall
+
+	(source "(props CameraPanel.class)"))
+
+([VirtualRegatta_Class240007] of  CloFuncall
+
+	(source "(.getProperty props CameraPanel.class)"))
+
+([VirtualRegatta_Class240008] of  CloFuncall
+
+	(source "(.getProperty props \"CameraPanel.class\")"))
+
+([VirtualRegatta_Class240009] of  CloFuncall
+
+	(source "(.getHeader (.getProperty props \"CameraPanel.class\"))"))
+
+([VirtualRegatta_Class240010] of  CloFuncall
+
+	(source "(type (.getProperty props \"CameraPanel.class\"))"))
+
+([VirtualRegatta_Class240011] of  CloFuncall
+
+	(source "(.getProperty props \"ru.igis.omtab.ext.CameraPanel\")"))
+
+([VirtualRegatta_Class240012] of  CloFuncall
+
+	(source "mb"))
+
+([VirtualRegatta_Class240013] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getComponentOfClass mb \"ru.igis.omtab.ext.CameraPanel\")"))
+
+([VirtualRegatta_Class240014] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getComponentOfClass mb \"com.bbn.openmap.plugin.PlugInLayer\")"))
+
+([VirtualRegatta_Class240015] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getComponentOfClass mb \"com.bbn.openmap.gui.ToolPanel\")"))
+
+([VirtualRegatta_Class240016] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getComponentOfClass mb \"com.bbn.openmap.gui.OMToolComponent\")"))
+
+([VirtualRegatta_Class240017] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getTab \"OpenMap\")"))
+
+([VirtualRegatta_Class240018] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getTab \"ru.igis.omtab.OpenMapTab\")"))
+
+([VirtualRegatta_Class240019] of  CloFuncall
+
+	(source "(def omt (ru.igis.omtab.Util/getTab \"ru.igis.omtab.OpenMapTab\"))"))
+
+([VirtualRegatta_Class240020] of  CloFuncall
+
+	(source "(ru.igis.omtab.Util/getComponentOfClass omt \"ru.igis.omtab.ext.CameraPanel\")"))
+
+([VirtualRegatta_Class240021] of  CloFuncall
+
+	(source "(def camp (ru.igis.omtab.Util/getComponentOfClass omt \"ru.igis.omtab.ext.CameraPanel\"))"))
+
+([VirtualRegatta_Class240022] of  CloFuncall
+
+	(source "(.getHeader camp)"))
+
+([VirtualRegatta_Class240023] of  CloFuncall
+
+	(source "(.getSubheader camp)"))
+
+([VirtualRegatta_Class240024] of  CloFuncall
+
+	(source "(.setSubheader camp \"QQ\")"))
+
+([VirtualRegatta_Class240025] of  CloFunction
+
+	(source "(if-let [omt (Util/getTab \"ru.igis.omtab.OpenMapTab\")]\n  (if-let [cmp (Util/getComponentOfClass omt \"ru.igis.omtab.ext.CameraPanel\")]\n    cmp))")
+	(title "get-camera-panel []"))
+
+([VirtualRegatta_Class240026] of  CloFuncall
+
+	(source "(get-camera-panel)"))
+
+([VirtualRegatta_Class250006] of  FLEET
+
+	(altitude 0)
+	(course 0)
+	(label "russor")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class250007] of  FLEET
+
+	(altitude 0)
+	(course 0)
+	(label "VALENTIN MASSU")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class250008] of  FLEET
+
+	(altitude 0)
+	(course 0)
+	(label "NICO_JUD - PVE / D-I")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class250009] of  FLEET
+
+	(altitude 0)
+	(course 0)
+	(label "TIPAPACHERI BSP")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class250010] of  FLEET
+
+	(altitude 0)
+	(course 0)
+	(label "KAH-YU - PVE / D-ICE")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class250011] of  FLEET
+
+	(altitude 0)
+	(course 0)
+	(label "MC KELE / INC-BUREAU")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class30000] of  MInspector
+
+	(title "Map Inspector"))
+
+([VirtualRegatta_Class40000] of  CloFunction
+
+	(source "(letfn [(to-map [s]\n             (let [s (.substring s 1 (dec (count s)))\n                    s (.split s \" \")\n                    s (remove #(.startsWith % \"pos\") s)\n                    s (remove #(.startsWith % \"=\") s)\n                    s (remove #(.startsWith % \"(\") s)\n                    s (apply str s)\n                    s (.replaceAll s \"=\" \" \")\n                    s (str \"{\" s \"}\")]   \n               (read-string s)))]\n  (try\n    (let [vdm (Vdm.)\n           _ (.parse vdm aivdm)\n           mes (AisMessage/getInstance vdm)\n           pos (.getValidPosition mes)\n           tos (.toString mes)\n           mp (to-map tos)\n           mp (assoc mp 'pos [(.getLatitude pos) (.getLongitude pos)])\n           imo (mp 'userId)]\n       (vswap! FLEET assoc imo (merge mp (@FLEET imo))))\n    (catch Exception e\n      (let [lio (.lastIndexOf aivdm \"*\")]\n        (when (= (.substring aivdm (dec lio) lio) \"4\")\n          (AIVDMProcessor/process aivdm)\n          (let [imo (AIVDMProcessor/getIMO)\n                 snm (AIVDMProcessor/getShipName)]\n            (vswap! FLEET assoc imo (assoc (@FLEET imo) 'name snm))) )) )))")
+	(title "parse-AIVDM [aivdm]"))
+
+([VirtualRegatta_Class50000] of  CloVar
+
+	(source ";;(volatile! (read-string (slurp \"data/vr/FLEET.clj\")))\n(volatile! {})")
+	(title "FLEET"))
+
+([VirtualRegatta_Class50001] of  CloFunction
+
+	(source "(try\n  (let [d (.split gprmc \",\")]\n    (if (>= (count d) 10)\n      (let [[_ time sts lat1 lat2 lon1 lon2 spd crs date] d]\n        (if (not= time (second @MYBOAT))\n          (let [gprmc [time\n                                 (parse-coord lat1 lat2)\n                                 (parse-coord lon1 lon2)\n                                 (round-speed (read-string spd))\n                                 (read-string crs)\n                                 date]]\n            (if (not= time (first @MYBOAT))\n              (println \"My boat GPRMC data\" gprmc))\n            (vreset! MYBOAT gprmc))))))\n  (catch Exception e\n    (println :gprmc-data :FAILURE)\n    nil))")
+	(title "parse-GPRMC [gprmc]"))
+
+([VirtualRegatta_Class50002] of  CloFunction
+
+	(source "(let [c (read-string c1)\n      mf (- c (int c))\n      dm (/ (int c) 100)\n      d (int dm)\n      m (int (* (- dm d) 100))\n      m (+ m mf)\n      d (if (or (= c2 \"S\") (= c2 \"W\")) (str \"-\" d) d)\n      r (MapOb/getDeg (str d \" \" m))]\n  (if (and (> r 0) (or (= c2 \"S\") (= c2 \"W\"))) \n    (- r)\n    r))")
+	(title "parse-coord [c1 c2]"))
+
+([VirtualRegatta_Class50003] of  CloFunction
+
+	(source "(let [s (* s 100)\n       s (Math/round s)]\n  (double (/ s 100)))")
+	(title "round-speed [s]"))
+
+([VirtualRegatta_Class50004] of  CloVar
+
+	(source ";;(volatile! (read-string (slurp \"data/vr/MYBOAT.clj\")))\n(volatile! [nil nil])")
+	(title "MYBOAT"))
+
+([VirtualRegatta_Class50005] of  CloFunction
+
+	(source "(let [[tim1 & _] ndata\n       [tim2 & _] odata]\n  (not= tim1 tim2))")
+	(title "diff-time? [ndata odata]"))
+
+([VirtualRegatta_Class60000] of  CloFunction
+
+	(source "(when-let [mo (and name (OMT/getMapOb name))]\n  (.setLatitude mo (double lat))\n  (.setLongitude mo (double lon))\n  (.setCourse mo (int crs))\n  (.setSpeed mo (double spd)))")
+	(title "update-mo [name lat lon crs spd]"))
+
+([VirtualRegatta_Class60008] of  Rule
+
+	(lhs "(VRControl status \"RUN\"\n	myboat-name ?myb\n	fleet-interval ?fli)\n(Clock sec ?s (= (mod ?s ?fli) 0))")
+	(rhs ";(println 3)\n(let [flt @nmea.server/FLEET]\n  (println \"Fleet\" (count flt))\n  (nmea.server/remove-fleet-boats flt ?myb)\n  (nmea.server/assert-fleet-boats flt ?s))")
+	(salience 0)
+	(title "FLEET-Info"))
+
+([VirtualRegatta_Class60010] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATION-TEXT "VR")
+	(%3ACREATION-TIMESTAMP "2025.08.31 11:51:42.488 MSK")
+	(%3ACREATOR "ru"))
+
+([VirtualRegatta_Class60012] of  Rule
+
+	(lhs "(VRControl status \"RUN\"\n	myboat-name ?name)\n?mb (MYBOAT lat ?lat \n	lon ?lon\n	crs ?crs\n	spd ?spd\n	date ?date\n	time ?time)")
+	(rhs ";(println 2)\n(retract ?mb)\n(nmea.server/create-or-update-mo ?name ?lat ?lon ?crs ?spd)\n(asser BOAT name  ?name\n	lat ?lat\n	lon ?lon \n	crs ?crs\n	spd ?spd\n	time ?time)")
+	(salience 0)
+	(title "Create-Boat-for-MYBOAT"))
+
+([VirtualRegatta_Class70000] of  CloVar
+
+	(source "(str \"<kml xmlns=\\\"http://www.opengis.net/kml/2.2\\\"\n  xmlns:gx=\\\"http://www.google.com/kml/ext/2.2\\\">\n  <Document>\n	<Camera>\n	<longitude>$lon</longitude>\n	<latitude>$lat</latitude>\n	<range>$rng</range>\n	<tilt>$tlt</tilt>\n	<altitude>$alt</altitude>\n	<heading>$hdg</heading>\n	<altitudeMode>absolute</altitudeMode>\n	</Camera>\n	<Style id=\\\"1\\\">\n	  <IconStyle>\n	    <Icon>\n	     <href>\" SAIL-URL \"</href>\n	    </Icon>\n	  </IconStyle>\n	</Style>\n	<Placemark>\n	  <styleUrl>#1</styleUrl>\n	  <name>$name</name>\n	  <description>On board of boat in Race</description>\n	  <Point>\n		<coordinates>$lon,$lat,0</coordinates>\n	  </Point>\n	</Placemark>\n  </Document>\n</kml>\")")
+	(title "TEMP-KML"))
+
+([VirtualRegatta_Class70001] of  CloVar
+
+	(source "\"<Placemark>\n	  <styleUrl>#1</styleUrl>\n	  <name>$name</name>\n	  <description>On board of boat in Race</description>\n	  <Point>\n		<coordinates>$lon,$lat,0</coordinates>\n	  </Point>\n	</Placemark>\"")
+	(title "BOAT-KML"))
+
+([VirtualRegatta_Class70002] of  CloVar
+
+	(source "(str \"<kml xmlns=\\\"http://www.opengis.net/kml/2.2\\\"\n	xmlns:gx=\\\"http://www.google.com/kml/ext/2.2\\\">\n	<Document>\n	  <Style id=\\\"1\\\">\n	    <IconStyle>\n		<Icon>\n		   <href>\" SAIL-URL \"</href>\n		</Icon>\n	    </IconStyle>\n	  </Style>\")")
+	(title "FLEET-PFX-KML"))
+
+([VirtualRegatta_Class70003] of  CloVar
+
+	(source "\"</Document>\n</kml>\"")
+	(title "FLEET-SFX-KML"))
+
+([VirtualRegatta_Class70005] of  CloVar
+
+	(source "(let [rpt \"resources/public/img/sailing.png\"\n        file (io/file rpt)\n        apt (.getAbsolutePath  file)]\n  (str \"file:\" apt))")
+	(title "SAIL-URL"))
+
+([VirtualRegatta_Class70011] of  CloFunction
+
+	(source "(let [name (.replace name \"<\" \"less\")\n         name (.replace name \">\" \"more\")\n         name (.replace name \"&\" \"and\")]\n         name)")
+	(title "name-correction [name]"))
+
+([VirtualRegatta_Class70012] of  CloFunction
+
+	(source "(let [alt (* (@CAMERA :altitude) \n                   (int (Math/pow 10 (@CAMERA :alt-power))))\n        name (name-correction name)\n        kml (.replace kml \"$name\" (str name))\n        kml (.replace kml \"$lat\" (str lat))\n        kml (.replace kml \"$lon\" (str lon))\n        kml (.replace kml \"$hdg\" (str hdg))\n        kml (.replace kml \"$alt\" (str alt))\n        kml (.replace kml \"$tlt\" (str (@CAMERA :tilt)))\n        kml (.replace kml \"$rng\" (str (@CAMERA :range)))]\n        kml)")
+	(title "substitute-in-kml [kml name lat lon hdg]"))
+
+([VirtualRegatta_Class70013] of  CloFunction
+
+	(source "(if-let [onb (rr/do-for-fact 'VRControl [] #(or (rete/slot-value 'onboard-boat %)\n                                                                              (rete/slot-value 'myboat-name %)))]\n  (if-let [mo (OMT/getMapOb onb)]\n    (let [lat (.getLatitude mo)\n             lon (.getLongitude mo)\n             crs (.getCourse mo)\n             dis (/ (@CAMERA :range) 1852)\n             [lat2 lon2] (Util/relPos lat lon (double crs) dis)\n             name (name-correction onb)\n             hdg (+ crs (@CAMERA :heading))\n             hdg (if (> hdg 360) (- hdg 360) hdg)\n             kml (substitute-in-kml TEMP-KML name lat2 lon2 hdg)]\n      kml)))")
+	(title "create-onboard-kml []"))
+
+([VirtualRegatta_Class70024] of  CloFunction
+
+	(source "(let [fleet (fn [f]\n                  (let [name (rete/slot-value 'name f)\n                          mo (OMT/getMapOb name)]\n                    (if mo\n                      (let [lat (.getLatitude mo)\n                              lon (.getLongitude mo)\n                              name (name-correction name)\n                              kml (.replace BOAT-KML \"$name\" name)\n                              kml (.replace kml \"$lat\" (str lat))\n                              kml (.replace kml \"$lon\" (str lon))]\n                         kml)\n                      \"\")))\n        onb (rr/do-for-fact 'VRControl [] #(rete/slot-value 'onboard-boat %))\n        fbb (rr/collect-for-all-facts 'BOAT [['name not= onb]] fleet)\n        kml (apply str fbb)\n        kml (str FLEET-PFX-KML kml FLEET-SFX-KML)]\n  ;;(println :FLEET-KML kml)\n  kml)")
+	(title "create-fleet-kml []"))
+
+([VirtualRegatta_Class70025] of  CloFunction
+
+	(source "(let [sel (DisplayUtilities/pickInstanceFromCollection \n                nil (cls-instances \"FLEET\") 0 \"Select Boat\")]\n  (when sel\n    (ssv inst \"onboard-boat\" (sv sel \"label\"))\n    (rr/modify-instances [inst])))")
+	(title "go-onboard [hm inst]"))
+
+([VirtualRegatta_Class80000] of  CloFunction
+
+	(source "(println \"INITIALIZING EXPERT SYSTEM\")\n(println \"1. Loading Clojure Programs...\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (loop [i 1 pins (svs wps \"cloPrograms\")]\n    (when (seq pins)\n      (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n      (recur (inc i) (rest pins)) ) )\n  (println \"  Annotated with \\\"VR\\\" instance of WorkingPrograms not found!\"))\n(println \"2. Starting Expert System.\")\n(if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") \"VR\")]\n  (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n  (println \"  Annotated with \\\"VR\\\" instance of Run not found!\"))\n(println \"3. Show VRControl\")\n(when-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n  (ssv vrc \"status\" \"START\")\n  (.show *prj* vrc)\n  (ClojureTab/invoke \"nmea.server\" \"start-camera-control\" vrc))\n(println \"EXPERT SYSTEM INITIALIZED\")")
+	(title "clojure-work []"))
+
+([VirtualRegatta_Class80001] of  CloProgram
+
+	(cloFunctions [VirtualRegatta_Class80000])
+	(cloNamespace [Clojure_Class300001])
+	(title "CW"))
+
+([VirtualRegatta_Class80002] of  WorkingPrograms
+
+	(cloPrograms
+		[RuleEngine_Class300001]
+		[RuleEngine_Class30000]
+		[VirtualRegatta_Class10000]
+		[VirtualRegatta_Class140000])
+	(title "Virtual Regatta Programs"))
+
+([VirtualRegatta_Class80003] of  %3AINSTANCE-ANNOTATION
+
+	(%3AANNOTATED-INSTANCE [VirtualRegatta_Class80002])
+	(%3AANNOTATION-TEXT "VR")
+	(%3ACREATION-TIMESTAMP "2025.08.28 19:48:58.230 MSK")
+	(%3ACREATOR "ru"))
+
+([VirtualRegatta_Class90000] of  CloVar
+
+	(source "(do\n(defn hand [req]\n  (do\n  (println :REQUEST req)\n  {:status 204\n     :headers {\"Access-Control-Allow-Origin\" \"*\"}}))\n\n(defroutes app-routes\n  (GET \"/camera\" [] (kml/create-onboard-kml))\n  (GET \"/fleet\" [] (kml/create-fleet-kml))\n  (POST \"/\" request (hand request))\n  (files \"/static\" {:root \"public\"}) ; Serves static files from a \"public\" folder\n  (not-found \"Page not found\")) ; A default handler for unmatched routes\n\n(def app (site app-routes))\n)")
+	(title "WEB-SERVER"))
+
+([VirtualRegatta_Class90001] of  NavOb
+
+	(altitude 0)
+	(course 0)
+	(label "yg")
+	(latitude "0 0")
+	(longitude "0 0")
+	(playground-index 0)
+	(speed 0.0)
+	(url "file:resources/public/img/yachtg.png")
+	(verticalSpeed 0.0))
+
+([VirtualRegatta_Class90025] of  CloFunction
+
+	(source "(let [nn (for [[imo bmp] flmp] (bmp 'name))]\n  (doseq [i (cls-instances \"FLEET\")]\n    (let [lab (sv i \"label\")]\n      (if (not (or (some #{lab} nn) myb))\n        (OMT/removeMapOb i true)))))")
+	(title "remove-fleet-boats [flmp myb]"))
+
+([VirtualRegatta_Class90034] of  CloVar
+
+	(source "{\"NOB\" \"file:resources/public/img/yachtg.png\"\n \"ONB\" \"file:resources/public/img/yachtr.png\"}")
+	(title "IMG-URL"))

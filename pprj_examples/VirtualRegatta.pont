@@ -1,0 +1,232 @@
+; Fri Sep 26 22:45:23 MSK 2025
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot crs
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot cam-alt-power
+		(type INTEGER)
+		(range 0 6)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot myboat-name
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-heading
+		(type INTEGER)
+		(range -180 180)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot name_
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-altitude
+		(type INTEGER)
+		(range 0 100)
+		(default 10)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot time
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fleet-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot status
+		(type STRING)
+		(default "INIT")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot myboat-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot onboard-boat
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-refresh-cam
+		(type STRING)
+;+		(value "Refresh/nmea.server/refresh-camera")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lon
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-tilt
+		(type INTEGER)
+		(range 0 90)
+		(default 80)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-run-es
+		(type STRING)
+;+		(value "Run ES/nmea.server/run-es")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lat
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot spd
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-range
+		(type INTEGER)
+		(range 0 400)
+		(default 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot imo
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot date
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-go-onboard
+		(type STRING)
+;+		(value "Go Onboard/nmea.server/go-onboard")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass FLEET
+	(is-a NavOb)
+	(role concrete))
+
+(defclass VROntology
+	(is-a USER)
+	(role abstract))
+
+(defclass BOAT
+	(is-a VROntology)
+	(role concrete)
+	(single-slot spd
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot time
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lon
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot imo
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot name_
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot lat
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot crs
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass MYBOAT
+	(is-a BOAT)
+	(role concrete)
+	(single-slot date
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass VRControl
+	(is-a VROntology)
+	(role concrete)
+	(single-slot cam-alt-power
+		(type INTEGER)
+		(range 0 6)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-heading
+		(type INTEGER)
+		(range -180 180)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot fleet-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot onboard-boat
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-altitude
+		(type INTEGER)
+		(range 0 100)
+		(default 10)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-start-stop-clock
+		(type STRING)
+;+		(value "Start-Stop Clock/ru.rules/start-stop-clock")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot myboat-name
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot status
+		(type STRING)
+		(default "INIT")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-tilt
+		(type INTEGER)
+		(range 0 90)
+		(default 80)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot title
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot myboat-interval
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-run-es
+		(type STRING)
+;+		(value "Run ES/nmea.server/run-es")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-refresh-cam
+		(type STRING)
+;+		(value "Refresh/nmea.server/refresh-camera")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot butt-go-onboard
+		(type STRING)
+;+		(value "Go Onboard/nmea.server/go-onboard")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot camera-range
+		(type INTEGER)
+		(range 0 400)
+		(default 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
