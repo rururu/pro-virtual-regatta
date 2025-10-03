@@ -1129,3 +1129,49 @@ Caused by: java.lang.IllegalArgumentException: null class
 2025.10.02 10:13:34.270 MSK INFO: Project load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj: 0 sec -- ProjectChooser.loadProject()
 2025.10.02 10:13:35.054 MSK INFO: UI display time = 0 sec -- ProjectManager$2.run()
 2025.10.02 10:14:04.606 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.02 20:44:50.955 MSK INFO: *** SYSTEM START ***
+2025.10.02 20:44:50.979 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.02 20:44:51.973 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.02 20:45:08.532 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 2 sec (ui) -- ProjectManager$3.run()
+2025.10.02 21:21:13.530 MSK INFO: *** SYSTEM START ***
+2025.10.02 21:21:13.555 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.02 21:21:14.525 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.02 21:21:22.369 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.02 21:50:45.577 MSK INFO: Project load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_base/RuleEngine.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.02 21:50:45.809 MSK INFO: UI display time = 0 sec -- ProjectManager$2.run()
+2025.10.02 21:54:32.375 MSK INFO: *** SYSTEM START ***
+2025.10.02 21:54:32.394 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.02 21:54:33.318 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.02 21:54:42.437 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.02 22:42:39.518 MSK INFO: *** SYSTEM START ***
+2025.10.02 22:42:39.535 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.02 22:42:40.383 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.02 22:42:50.038 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.02 22:49:25.717 MSK INFO: Project load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_base/RuleEngine.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.02 22:49:26.039 MSK INFO: UI display time = 0 sec -- ProjectManager$2.run()
+2025.10.03 10:52:50.832 MSK INFO: *** SYSTEM START ***
+2025.10.03 10:52:50.854 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.03 10:52:51.903 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.03 10:53:00.434 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_base/RuleEngine.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.03 10:54:40.830 MSK INFO: Project load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.03 10:54:41.841 MSK INFO: UI display time = 1 sec -- ProjectManager$2.run()
+2025.10.03 16:41:10.823 MSK INFO: *** SYSTEM START ***
+2025.10.03 16:41:10.842 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.03 16:41:11.741 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.03 16:41:23.576 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.03 16:56:52.280 MSK INFO: *** SYSTEM START ***
+2025.10.03 16:56:52.296 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.03 16:56:53.139 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.03 16:56:58.571 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.03 17:10:27.411 MSK INFO: *** SYSTEM START ***
+2025.10.03 17:10:27.428 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.03 17:10:28.299 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.03 17:10:45.444 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.03 17:15:17.397 MSK INFO: *** SYSTEM START ***
+2025.10.03 17:15:17.413 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.03 17:15:18.246 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.03 17:15:56.206 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.03 17:20:38.040 MSK INFO: *** SYSTEM START ***
+2025.10.03 17:20:38.058 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
+2025.10.03 17:20:38.883 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.03 17:20:47.010 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()

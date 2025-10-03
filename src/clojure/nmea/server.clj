@@ -12,6 +12,7 @@
   [ru.rules :as rr]
   [kml.genvr :as kml])
 (:import
+  clojuretab.ClojureTab
   java.net.URL
   javax.swing.ImageIcon
   ru.igis.omtab.OpenMapTab
@@ -167,19 +168,23 @@
 
 (defn assert-fleet-boats [flmp time]
   (doseq [[imo bmp] flmp]
-  (let [[lat lon]  (bmp 'pos)
-          name  (bmp 'name) 
-          crs (int (/ (bmp 'cog) 10))
-          spd (round-sog (bmp 'sog))]
-    (create-or-update-mo name lat lon crs spd)
-    (rete/assert-frame ['BOAT 
-      'name name
-      'lat lat
-      'lon lon
-      'crs crs
-      'spd spd
-      'time time
-      'imo imo]))))
+  (try
+    (let [[lat lon]  (bmp 'pos)
+            name  (bmp 'name) 
+            crs (int (/ (bmp 'cog) 10))
+            spd (round-sog (bmp 'sog))]
+      (create-or-update-mo name lat lon crs spd)
+      (rete/assert-frame ['BOAT 
+        'name name
+        'lat lat
+        'lon lon
+        'crs crs
+        'spd spd
+        'time time
+        'imo imo]))
+    (catch Exception e
+      (println "Corrupted or incomplete information:")
+      (println "  " :BMP bmp)))))
 
 (defn assert-my-boat [boat sec]
   (let [[vrt lat lon spd crs date :as bot] boat]
@@ -207,10 +212,12 @@
     (.setImageIcon lm imi))))
 
 (defn go-onboard [hm inst]
-  (let [sel (DisplayUtilities/pickInstanceFromCollection 
+  (println :go-onboard)
+(let [sel (DisplayUtilities/pickInstanceFromCollection 
                 nil (cls-instances "FLEET") 0 "Select Boat")]
   (when sel
     (ssv inst "onboard-boat" (sv sel "label"))
+    (println  (sv sel "label"))
     (rr/modify-instances [inst]))))
 
 (defn update-mo [name lat lon crs spd]
@@ -232,11 +239,34 @@
   (if-let [cmp (Util/getComponentOfClass omt "ru.igis.omtab.ext.CameraPanel")]
     cmp)))
 
+(defn restart-vr-plugin []
+  (println "RESTART VR PLUGIN")
+(clock/stop-clock)
+(println "1. Loading Clojure Programs..")
+(if-let [wps (ClojureTab/findAnnotated (cls-instances "WorkingPrograms") "VR")]
+  (do
+    (loop [i 1 pins (svs wps "cloPrograms")]
+      (when (seq pins)
+        (println (str " 1." i " " (sv (first pins) "title") " = " (ClojureTab/loadProgram (first pins)) ))
+        (recur (inc i) (rest pins))))
+    (println "2. Start Expert System..")
+    (if-let [run (ClojureTab/findAnnotated (cls-instances "Run") "VR")]
+      (do
+        (ClojureTab/invoke "ru.rules" "run-engine" run)
+        (println "3. Assert VR Control..")
+        (if-let [vrc (ClojureTab/findAnnotated (cls-instances "VRControl") "VR")]
+          (do
+            (rr/assert-instances [vrc])
+            (println "4. Start Clock..")
+            (clock/start-clock))
+          (println "  Annotated with \"VR\" instance of VRControl not found!")))))))
+
 (defn start-camera-control [ins]
   (if-let [cmp (get-camera-panel)]
   (let [rosh (proxy [RosetteHandler] []
                       (rosetteDirection [dir]
                         (ssv ins "camera-heading" dir)
+                        (rr/modify-instances [ins])
                         dir))
            spih (proxy [SpinnerHandler] []
                       (spinnerValue [ttt val]
@@ -246,13 +276,13 @@
                           "altitude power" (ssv ins "cam-alt-power" val)
                           "tilt" (ssv ins "camera-tilt" val)
                           "range" (ssv ins "camera-range" val))
-                       (rr/modify-instances [ins])
+                        (rr/modify-instances [ins])
                         val))
            addh (proxy [AddonListener] []
                         (actionPerformed [evt]
                           (condp = (.getActionCommand evt)
-                            "start" (rr/start-stop-clock nil nil)
-                            "stop" (rr/start-stop-clock nil nil)
+                            "start" (restart-vr-plugin)
+                            "stop" (clock/stop-clock)
                             "action" (if-let [vrc (fainst (cls-instances "VRControl") "VR")]
                                                (go-onboard nil vrc)))))]
     (.setRosetteHandler cmp rosh)
