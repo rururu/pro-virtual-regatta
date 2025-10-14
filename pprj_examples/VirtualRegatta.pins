@@ -1,4 +1,4 @@
-; Fri Oct 03 18:06:23 MSK 2025
+; Tue Oct 14 21:50:49 MSK 2025
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -32,14 +32,14 @@
 		[VirtualRegatta_Class180000])
 	(Debug "FINE")
 	(label "Virtual Regatta Map")
-	(Latitude "46.50")
+	(Latitude "30")
 	(layers
 		[igis_Class40012]
 		[igis_Class1]
 		[igis_Class40011]
 		[igis_Class40010])
-	(Longitude "-1.77")
-	(Scale "40000000")
+	(Longitude "0")
+	(Scale "100000000")
 	(startUpLayers
 		[igis_Class40012]
 		[igis_Class1]
@@ -76,6 +76,7 @@
 		[VirtualRegatta_Class200024]
 		[VirtualRegatta_Class240025]
 		[VirtualRegatta_Class210000]
+		[VirtualRegatta_Class250050]
 		[VirtualRegatta_Class130000])
 	(cloNamespace [VirtualRegatta_Class10001])
 	(cloVars
@@ -93,7 +94,7 @@
 
 ([VirtualRegatta_Class100001] of  CloFunction
 
-	(source "(doseq [[imo bmp] flmp]\n  (try\n    (let [[lat lon]  (bmp 'pos)\n            name  (bmp 'name) \n            crs (int (/ (bmp 'cog) 10))\n            spd (round-sog (bmp 'sog))]\n      (create-or-update-mo name lat lon crs spd)\n      (rete/assert-frame ['BOAT \n        'name name\n        'lat lat\n        'lon lon\n        'crs crs\n        'spd spd\n        'time time\n        'imo imo]))\n    (catch Exception e\n      (println \"Corrupted or incomplete information:\")\n      (println \"  \" :BMP bmp))))")
+	(source "(doseq [[imo bmp] flmp]\n  (try\n    (let [[lat lon]  (bmp 'pos)\n            name  (bmp 'name) \n            crs (int (/ (bmp 'cog) 10))\n            spd (round-sog (bmp 'sog))]\n      (when (seq name)\n        (create-or-update-mo name lat lon crs spd)\n        (rete/assert-frame ['BOAT \n          'name name\n          'lat lat\n          'lon lon\n          'crs crs\n          'spd spd\n          'time time\n          'imo imo])))\n    (catch Exception e\n      (println \"Corrupted or incomplete information:\")\n      (println \"  \" :BMP bmp))))")
 	(title "assert-fleet-boats [flmp time]"))
 
 ([VirtualRegatta_Class100002] of  CloFunction
@@ -190,7 +191,7 @@
 
 ([VirtualRegatta_Class130000] of  CloFunction
 
-	(source "(if-let [cmp (get-camera-panel)]\n  (let [rosh (proxy [RosetteHandler] []\n                      (rosetteDirection [dir]\n                        (ssv ins \"camera-heading\" dir)\n                        (rr/modify-instances [ins])\n                        dir))\n           spih (proxy [SpinnerHandler] []\n                      (spinnerValue [ttt val]\n                        (condp = ttt\n                          \"heading\" (ssv ins \"camera-heading\" val)\n                          \"altitude\" (ssv ins \"camera-altitude\" val)\n                          \"altitude power\" (ssv ins \"cam-alt-power\" val)\n                          \"tilt\" (ssv ins \"camera-tilt\" val)\n                          \"range\" (ssv ins \"camera-range\" val))\n                        (rr/modify-instances [ins])\n                        val))\n           addh (proxy [AddonListener] []\n                        (actionPerformed [evt]\n                          (condp = (.getActionCommand evt)\n                            \"start\" (restart-vr-plugin)\n                            \"stop\" (clock/stop-clock)\n                            \"action\" (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n                                               (go-onboard nil vrc)))))]\n    (.setRosetteHandler cmp rosh)\n    (.setSpinnerHandler cmp spih)\n    (.setAddonListener cmp addh)\n    (println \"Camera Control started..\"))\n  (println \"CameraPanel not found!\"))")
+	(source "(if-let [cmp (get-camera-panel)]\n  (let [rosh (proxy [RosetteHandler] []\n                      (rosetteDirection [dir]\n                        (ssv ins \"camera-heading\" dir)\n                        (rr/modify-instances [ins])\n                        dir))\n           spih (proxy [SpinnerHandler] []\n                      (spinnerValue [ttt val]\n                        (condp = ttt\n                          \"heading\" (ssv ins \"camera-heading\" val)\n                          \"altitude\" (ssv ins \"camera-altitude\" val)\n                          \"altitude power\" (ssv ins \"cam-alt-power\" val)\n                          \"tilt\" (ssv ins \"camera-tilt\" val)\n                          \"range\" (ssv ins \"camera-range\" val))\n                        (rr/modify-instances [ins])\n                        val))\n           addh (proxy [AddonListener] []\n                        (actionPerformed [evt]\n                          (condp = (.getActionCommand evt)\n                            \"start\" (restart-vr-plugin)\n                            \"stop\" (stop-vr-plugin)\n                            \"action\" (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n                                               (go-onboard nil vrc)))))]\n    (.setRosetteHandler cmp rosh)\n    (.setSpinnerHandler cmp spih)\n    (.setAddonListener cmp addh)\n    (println \"Camera Control started..\"))\n  (println \"CameraPanel not found!\"))")
 	(title "start-camera-control [ins]"))
 
 ([VirtualRegatta_Class130001] of  CloFunction
@@ -294,30 +295,6 @@
 
 	(source "MYBOAT"))
 
-([VirtualRegatta_Class190003] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "russor")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class190004] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "KAH-YU - PVE / D-ICE")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VirtualRegatta_Class190005] of  Rule
 
 	(lhs "(VRControl camera-heading ?hdg\n	camera-altitude ?alt\n	cam-alt-power ?apw\n	camera-tilt ?tilt\n	camera-range ?rng\n	onboard-boat ?onb)\n(Clock)")
@@ -335,18 +312,6 @@
 	(class "com.bbn.openmap.gui.NavigatePanel")
 	(label "NavPanel"))
 
-([VirtualRegatta_Class200005] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "NAVACK-C2B-ESF3")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
 ([VirtualRegatta_Class200006] of  CloVar
 
 	(source "(volatile! {\n  :heading 0\n  :altitude 10\n  :alt-power 0\n  :tilt 80\n  :range 100\n  :onboard \"\"})")
@@ -356,13 +321,13 @@
 
 	(cam-alt-power 0)
 	(camera-altitude 10)
-	(camera-heading -64)
+	(camera-heading -90)
 	(camera-range 21)
 	(camera-tilt 80)
 	(fleet-interval 120)
 	(myboat-interval 4)
 	(myboat-name "russor")
-	(onboard-boat "KAH-YU - PVE / D-ICE")
+	(onboard-boat "russor")
 	(status "RUN")
 	(title "VR Plugin Control"))
 
@@ -385,7 +350,7 @@
 
 ([VirtualRegatta_Class210000] of  CloFunction
 
-	(source "(println \"RESTART VR PLUGIN\")\n(clock/stop-clock)\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do\n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Expert System..\")\n    (if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") \"VR\")]\n      (do\n        (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n        (println \"3. Assert VR Control..\")\n        (if-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n          (do\n            (rr/assert-instances [vrc])\n            (println \"4. Start Clock..\")\n            (clock/start-clock))\n          (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\"))))))")
+	(source "(println \"RESTART VR PLUGIN\")\n(clock/stop-clock)\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do\n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Expert System..\")\n    (if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") \"VR\")]\n      (do\n        (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n        (println \"3. Assert VR Control..\")\n        (if-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n          (do\n            (rr/assert-instances [vrc])\n            (println \"4. Start Clock..\")\n            (OMT/setTimerRunning true)\n            (clock/start-clock))\n          (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\"))))))")
 	(title "restart-vr-plugin []"))
 
 ([VirtualRegatta_Class210001] of  CloFuncall
@@ -400,342 +365,6 @@
 
 	(source "(let [uri (:uri req)\n        file-path (str (.substring uri 6))\n        file (io/file file-path)]\n    (if (.exists file)\n      (resp/file-response file-path)\n      (resp/not-found \"Not Found\")))")
 	(title "static-file-handler [req]"))
-
-([VirtualRegatta_Class210006] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "PETEWELLS")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210007] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "JOLLY__ROGER")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210008] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "AUDESTA - LFP")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210009] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "JULIEN 13 29")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210010] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "LESFROGSNAILS")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210011] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "TCHOA860-EZ THESEACL")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210012] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "TEVEZAN21")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210013] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "BAYADHRE / INC-BUREA")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210014] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "BLEUVOLCANO")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210015] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "MC KELE / INC-BUREAU")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210016] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "LABOUSSOLE93")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210017] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "MASTHO13-WSP")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210018] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "TOQUART")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210019] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "TIPAPACHERI BSP")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210020] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "FALCON470 / INC-BURE")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210021] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "PEZZACARDO")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210022] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "ONE ATC")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210023] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "NANOUKT")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210024] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "IDARIS72")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210025] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "MIAMIOU8")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210026] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "LARTAP")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210027] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "FLOCON DU LAC")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210028] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "LOHANN LA TERREUR -")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210029] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "MATTSSS29")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210030] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "LEMODESTE - PVE / D-")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210031] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "NLO")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210032] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "NICO_JUD - PVE / D-I")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
-
-([VirtualRegatta_Class210033] of  FLEET
-
-	(altitude 0)
-	(course 0)
-	(label "BLACKPHILOU")
-	(latitude "0 0")
-	(longitude "0 0")
-	(playground-index 0)
-	(speed 0.0)
-	(url "file:resources/public/img/yachtg.png")
-	(verticalSpeed 0.0))
 
 ([VirtualRegatta_Class220001] of  CloFuncall
 
@@ -818,26 +447,27 @@
 
 	(source "(def omt (ru.igis.omtab.Util/getTab \"ru.igis.omtab.OpenMapTab\"))"))
 
-([VirtualRegatta_Class240020] of  CloFuncall
-
-	(source "(ru.igis.omtab.Util/getComponentOfClass omt \"ru.igis.omtab.ext.CameraPanel\")"))
-
-([VirtualRegatta_Class240021] of  CloFuncall
-
-	(source "(def camp (ru.igis.omtab.Util/getComponentOfClass omt \"ru.igis.omtab.ext.CameraPanel\"))"))
-
-([VirtualRegatta_Class240022] of  CloFuncall
-
-	(source "(.getHeader camp)"))
-
-([VirtualRegatta_Class240023] of  CloFuncall
-
-	(source "(.getSubheader camp)"))
-
 ([VirtualRegatta_Class240025] of  CloFunction
 
 	(source "(if-let [omt (Util/getTab \"ru.igis.omtab.OpenMapTab\")]\n  (if-let [cmp (Util/getComponentOfClass omt \"ru.igis.omtab.ext.CameraPanel\")]\n    cmp))")
 	(title "get-camera-panel []"))
+
+([VirtualRegatta_Class250050] of  CloFunction
+
+	(source "(clock/stop-clock)\n(doseq [i (cls-instances \"FLEET\")]\n  (delin i))")
+	(title "stop-vr-plugin []"))
+
+([VirtualRegatta_Class250051] of  CloFuncall
+
+	(source "*kb*"))
+
+([VirtualRegatta_Class250052] of  CloFuncall
+
+	(source "*prj*"))
+
+([VirtualRegatta_Class250053] of  CloFuncall
+
+	(source "(alter-var-root #'*prj* (fn [_] (force *prj*)))"))
 
 ([VirtualRegatta_Class30000] of  MInspector
 
@@ -950,12 +580,12 @@
 
 ([VirtualRegatta_Class70025] of  CloFunction
 
-	(source "(println :go-onboard)\n(let [sel (DisplayUtilities/pickInstanceFromCollection \n                nil (cls-instances \"FLEET\") 0 \"Select Boat\")]\n  (when sel\n    (ssv inst \"onboard-boat\" (sv sel \"label\"))\n    (println  (sv sel \"label\"))\n    (rr/modify-instances [inst])))")
+	(source "(println :go-onboard)\n(let [flt (sort-by #(sv % \"label\") (cls-instances \"FLEET\"))\n        sel (DisplayUtilities/pickInstanceFromCollection \n                nil flt 0 \"Select Boat\")]\n  (if sel\n    (let [lab (sv sel \"label\")\n            mo (OMT/getMapOb lab)\n            mb (OpenMapTab/getMapBean)]            \n      (ssv inst \"onboard-boat\" lab)\n      (println  lab)\n      (.setCenter mb  (.getLatitude mo) (.getLongitude mo))\n      (.setScale mb (float 4000000))\n      (rr/modify-instances [inst]))))")
 	(title "go-onboard [hm inst]"))
 
 ([VirtualRegatta_Class80000] of  CloFunction
 
-	(source "(println \"START VR PLUGIN\")\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do \n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins))))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Camera..\")\n    (if-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n      (do\n        (ClojureTab/invoke \"nmea.server\" \"start-camera-control\" vrc)\n        (println \"3. Start NMEA server..\")\n        (ClojureTab/invoke \"nmea.server\" \"run-server\"))\n      (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\")))\n  (println \"  Annotated with \\\"VR\\\" instance of WorkingPrograms not found!\"))")
+	(source "(println \"START VR PLUGIN\")\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do \n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins))))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Camera..\")\n    (if-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n      (let [omt (ru.igis.omtab.OpenMapTab/getOpenMapTab)]\n        (ClojureTab/invoke \"nmea.server\" \"start-camera-control\" vrc)\n        (println \"3. Start NMEA server..\")\n        (ClojureTab/invoke \"nmea.server\" \"run-server\")\n        (javax.swing.JOptionPane/showMessageDialog omt \n           \"Initialization is complete.\\n Click the \\\"Camera Control\\\" button\\n and follow the instructions.\"))\n      (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\")))\n  (println \"  Annotated with \\\"VR\\\" instance of WorkingPrograms not found!\"))")
 	(title "clojure-work []"))
 
 ([VirtualRegatta_Class80001] of  CloProgram
@@ -969,8 +599,8 @@
 	(cloPrograms
 		[RuleEngine_Class300001]
 		[RuleEngine_Class30000]
-		[VirtualRegatta_Class10000]
-		[VirtualRegatta_Class140000])
+		[VirtualRegatta_Class140000]
+		[VirtualRegatta_Class10000])
 	(title "Virtual Regatta Programs"))
 
 ([VirtualRegatta_Class80003] of  %3AINSTANCE-ANNOTATION

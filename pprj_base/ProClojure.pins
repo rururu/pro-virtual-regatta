@@ -1,4 +1,4 @@
-; Wed Sep 03 13:32:49 MSK 2025
+; Tue Oct 14 21:42:50 MSK 2025
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -10,7 +10,7 @@
 
 ([Clojure_Class10] of  CloVar
 
-	(source "(.getCurrentProject (ProjectManager/getProjectManager))")
+	(source "nil")
 	(title "^:dynamic *prj*"))
 
 ([Clojure_Class10000] of  CloProgram
@@ -60,11 +60,12 @@
 		[ProClojure_Class10000]
 		[ProClojure_Class20001]
 		[ProClojure_Class20000]
-		[ProClojure_Class30000])
+		[ProClojure_Class30000]
+		[ProClojure_Class40000])
 	(cloNamespace [Clojure_Class9])
 	(cloVars
-		[Clojure_Class10]
 		[Clojure_Class11]
+		[Clojure_Class10]
 		[ProClojure_Class10002])
 	(title "Protege"))
 
@@ -84,7 +85,7 @@
 
 ([Clojure_Class11] of  CloVar
 
-	(source "(.getKnowledgeBase *prj*)")
+	(source "nil")
 	(title "^:dynamic *kb*"))
 
 ([Clojure_Class110000] of  CloMacro
@@ -481,3 +482,8 @@
 
 	(source "(if (or (seq? x) (vector? x) (map? x))\n    (do (ctpls x) (count x))\n    (do (ctpl x) 1))")
 	(title "see [x]"))
+
+([ProClojure_Class40000] of  CloFunction
+
+	(source "(when (nil? *prj*)\n  (def ^:dynamic *prj*  (.getCurrentProject (ProjectManager/getProjectManager)))\n  (def ^:dynamic *kb* (.getKnowledgeBase *prj*))\n  (println \"Protege project and KB initialized.\")\n  (println *prj*)\n  (println *kb*))")
+	(title "init-protege []"))

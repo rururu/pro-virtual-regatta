@@ -1175,3 +1175,211 @@ Caused by: java.lang.IllegalArgumentException: null class
 2025.10.03 17:20:38.058 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @2aa27288 -- SystemUtilities.setLookAndFeel()
 2025.10.03 17:20:38.883 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
 2025.10.03 17:20:47.010 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.04 14:37:22.409 MSK INFO: *** SYSTEM START ***
+2025.10.04 14:37:22.426 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @319854f0 -- SystemUtilities.setLookAndFeel()
+2025.10.04 14:37:23.548 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.04 14:37:45.273 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.04 18:50:24.685 MSK INFO: *** SYSTEM START ***
+2025.10.04 18:50:24.700 MSK WARNING: java.lang.IllegalAccessException: class edu.stanford.smi.protege.util.SystemUtilities cannot access class com.apple.laf.AquaLookAndFeel (in module java.desktop) because module java.desktop does not export com.apple.laf to unnamed module @319854f0 -- SystemUtilities.setLookAndFeel()
+2025.10.04 18:50:25.498 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.04 18:50:33.660 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.07 20:13:12.218 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:13:12.228 MSK WARNING: Look and feel not found: com.apple.laf.AquaLookAndFeel -- SystemUtilities.setLookAndFeel()
+2025.10.07 20:13:12.230 MSK INFO: Exception caught -- java.awt.HeadlessException: 
+No X11 DISPLAY variable was set,
+or no headful library support was found,
+but this program performed an operation which requires it,
+
+	at java.desktop/java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:164)
+	at java.desktop/java.awt.Window.<init>(Window.java:553)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:428)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:393)
+	at java.desktop/javax.swing.SwingUtilities$SharedOwnerFrame.<init>(SwingUtilities.java:1925)
+	at java.desktop/javax.swing.SwingUtilities.getSharedOwnerFrame(SwingUtilities.java:2001)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:183)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:135)
+	at edu.stanford.smi.protege.ui.SplashScreen.<init>(Unknown Source)
+	at edu.stanford.smi.protege.Application.realmain(Unknown Source)
+	at edu.stanford.smi.protege.Application$3.run(Unknown Source)
+
+2025.10.07 20:14:28.823 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:14:28.835 MSK INFO: Exception caught -- java.lang.ExceptionInInitializerError
+	at com.jgoodies.looks.plastic.PlasticLookAndFeel.<clinit>(PlasticLookAndFeel.java:135)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:421)
+	at java.base/java.lang.Class.forName(Class.java:412)
+	at edu.stanford.smi.protege.util.SystemUtilities.setLookAndFeel(Unknown Source)
+	at edu.stanford.smi.protege.util.SystemUtilities.loadLookAndFeel(Unknown Source)
+	at edu.stanford.smi.protege.util.SystemUtilities.initGraphics(Unknown Source)
+	at edu.stanford.smi.protege.Application.initialize(Unknown Source)
+	at edu.stanford.smi.protege.Application.realmain(Unknown Source)
+	at edu.stanford.smi.protege.Application$3.run(Unknown Source)
+Caused by: java.awt.HeadlessException: 
+No X11 DISPLAY variable was set,
+or no headful library support was found,
+but this program performed an operation which requires it,
+
+	at java.desktop/sun.awt.HeadlessToolkit.getScreenResolution(HeadlessToolkit.java:122)
+	at com.jgoodies.looks.LookUtils.isLowResolution(LookUtils.java:510)
+	at com.jgoodies.looks.LookUtils.<clinit>(LookUtils.java:279)
+	... 10 more
+
+2025.10.07 20:15:50.766 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:15:50.929 MSK INFO: Exception caught -- java.awt.HeadlessException: 
+No X11 DISPLAY variable was set,
+or no headful library support was found,
+but this program performed an operation which requires it,
+
+	at java.desktop/java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:164)
+	at java.desktop/java.awt.Window.<init>(Window.java:553)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:428)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:393)
+	at java.desktop/javax.swing.SwingUtilities$SharedOwnerFrame.<init>(SwingUtilities.java:1925)
+	at java.desktop/javax.swing.SwingUtilities.getSharedOwnerFrame(SwingUtilities.java:2001)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:183)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:135)
+	at edu.stanford.smi.protege.ui.SplashScreen.<init>(Unknown Source)
+	at edu.stanford.smi.protege.Application.realmain(Unknown Source)
+	at edu.stanford.smi.protege.Application$3.run(Unknown Source)
+
+2025.10.07 20:21:03.392 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:21:03.503 MSK INFO: Exception caught -- java.awt.HeadlessException: 
+No X11 DISPLAY variable was set,
+or no headful library support was found,
+but this program performed an operation which requires it,
+
+	at java.desktop/java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:164)
+	at java.desktop/java.awt.Window.<init>(Window.java:553)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:428)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:393)
+	at java.desktop/javax.swing.SwingUtilities$SharedOwnerFrame.<init>(SwingUtilities.java:1925)
+	at java.desktop/javax.swing.SwingUtilities.getSharedOwnerFrame(SwingUtilities.java:2001)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:183)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:135)
+	at edu.stanford.smi.protege.ui.SplashScreen.<init>(Unknown Source)
+	at edu.stanford.smi.protege.Application.realmain(Unknown Source)
+	at edu.stanford.smi.protege.Application$3.run(Unknown Source)
+
+2025.10.07 20:24:06.596 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:24:06.699 MSK INFO: Exception caught -- java.awt.HeadlessException: 
+No X11 DISPLAY variable was set,
+or no headful library support was found,
+but this program performed an operation which requires it,
+
+	at java.desktop/java.awt.GraphicsEnvironment.checkHeadless(GraphicsEnvironment.java:164)
+	at java.desktop/java.awt.Window.<init>(Window.java:553)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:428)
+	at java.desktop/java.awt.Frame.<init>(Frame.java:393)
+	at java.desktop/javax.swing.SwingUtilities$SharedOwnerFrame.<init>(SwingUtilities.java:1925)
+	at java.desktop/javax.swing.SwingUtilities.getSharedOwnerFrame(SwingUtilities.java:2001)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:183)
+	at java.desktop/javax.swing.JWindow.<init>(JWindow.java:135)
+	at edu.stanford.smi.protege.ui.SplashScreen.<init>(Unknown Source)
+	at edu.stanford.smi.protege.Application.realmain(Unknown Source)
+	at edu.stanford.smi.protege.Application$3.run(Unknown Source)
+
+2025.10.07 20:30:26.543 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:30:26.841 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.07 20:30:58.560 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:30:58.727 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.07 20:31:39.734 MSK INFO: Project load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.07 20:31:40.971 MSK INFO: UI display time = 1 sec -- ProjectManager$2.run()
+2025.10.07 20:35:23.040 MSK INFO: *** SYSTEM START ***
+2025.10.07 20:35:23.197 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.07 20:35:29.295 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 10:41:25.178 MSK INFO: *** SYSTEM START ***
+2025.10.13 10:41:25.527 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 10:41:33.120 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.13 13:29:11.397 MSK INFO: *** SYSTEM START ***
+2025.10.13 13:29:11.558 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 13:29:13.232 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 17:26:57.856 MSK INFO: *** SYSTEM START ***
+2025.10.13 17:26:58.050 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 17:26:59.992 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 17:43:03.205 MSK INFO: *** SYSTEM START ***
+2025.10.13 17:43:03.405 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 17:43:05.143 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 17:54:22.189 MSK INFO: *** SYSTEM START ***
+2025.10.13 17:54:22.354 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 17:54:23.967 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 18:08:57.282 MSK INFO: *** SYSTEM START ***
+2025.10.13 18:08:57.478 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 18:08:59.419 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 18:42:54.300 MSK INFO: *** SYSTEM START ***
+2025.10.13 18:42:54.517 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 18:42:56.377 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 18:48:29.381 MSK INFO: *** SYSTEM START ***
+2025.10.13 18:48:29.548 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 18:48:31.125 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:22:33.108 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:22:33.331 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 19:22:35.141 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:24:14.829 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:24:15.065 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 19:24:22.701 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:26:50.615 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:26:50.802 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 19:26:57.464 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:28:31.568 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:28:31.762 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 19:28:37.360 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:40:49.504 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:40:49.698 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 19:40:55.581 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:46:15.272 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:46:15.450 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.13 19:46:17.312 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.13 19:57:10.460 MSK INFO: *** SYSTEM START ***
+2025.10.13 19:57:10.471 MSK WARNING: Plugins directory not found: /home/ru/clojure/pro-virtual-regatta/plugins -- PluginUtilities.findPluginsDirectory()
+2025.10.13 19:57:10.520 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.13 19:57:10.524 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.13 20:47:13.701 MSK INFO: *** SYSTEM START ***
+2025.10.13 20:47:13.712 MSK WARNING: Plugins directory not found: /home/ru/clojure/pro-virtual-regatta/plugins -- PluginUtilities.findPluginsDirectory()
+2025.10.13 20:47:13.761 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.13 20:47:13.764 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.14 12:51:38.212 MSK INFO: *** SYSTEM START ***
+2025.10.14 12:51:38.503 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 12:52:28.897 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 2 sec (ui) -- ProjectManager$3.run()
+2025.10.14 12:53:02.060 MSK INFO: Project load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_base/ProClojure.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.14 12:53:02.464 MSK INFO: UI display time = 0 sec -- ProjectManager$2.run()
+2025.10.14 13:02:20.279 MSK INFO: *** SYSTEM START ***
+2025.10.14 13:02:20.442 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 13:02:22.083 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 13:03:07.900 MSK INFO: *** SYSTEM START ***
+2025.10.14 13:03:08.060 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 13:03:09.671 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 13:18:16.447 MSK INFO: *** SYSTEM START ***
+2025.10.14 13:18:16.611 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 13:18:18.260 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 13:52:22.551 MSK INFO: *** SYSTEM START ***
+2025.10.14 13:52:22.741 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 13:52:24.513 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 17:28:35.565 MSK INFO: *** SYSTEM START ***
+2025.10.14 17:28:35.788 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 17:28:37.694 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 17:44:35.573 MSK INFO: Project load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_base/ProClojure.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.14 17:44:35.901 MSK INFO: UI display time = 0 sec -- ProjectManager$2.run()
+2025.10.14 17:47:36.972 MSK INFO: *** SYSTEM START ***
+2025.10.14 17:47:37.188 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 17:47:39.095 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 20:52:04.495 MSK INFO: *** SYSTEM START ***
+2025.10.14 20:52:04.737 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 20:52:13.235 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_base/ProClojure.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.14 21:03:25.638 MSK INFO: *** SYSTEM START ***
+2025.10.14 21:03:25.796 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 21:03:27.434 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 21:04:06.936 MSK INFO: *** SYSTEM START ***
+2025.10.14 21:04:07.091 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 21:04:08.696 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 0 sec (ui) -- ProjectManager$3.run()
+2025.10.14 21:13:05.208 MSK INFO: *** SYSTEM START ***
+2025.10.14 21:13:05.458 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 21:13:12.740 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_base/ProClojure.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.14 21:17:45.926 MSK INFO: Project load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_base/MapInspector.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.14 21:17:47.180 MSK INFO: UI display time = 1 sec -- ProjectManager$2.run()
+2025.10.14 21:41:05.163 MSK INFO: Project load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_base/ProClojure.pprj: 0 sec -- ProjectChooser.loadProject()
+2025.10.14 21:41:05.418 MSK INFO: UI display time = 0 sec -- ProjectManager$2.run()
+2025.10.14 21:44:49.689 MSK INFO: *** SYSTEM START ***
+2025.10.14 21:44:49.937 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.14 21:44:51.388 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.14 21:44:51.389 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.14 21:44:52.999 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()

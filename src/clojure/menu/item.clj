@@ -12,10 +12,12 @@
         (recur (inc i) (rest pins))))
     (println "2. Start Camera..")
     (if-let [vrc (ClojureTab/findAnnotated (cls-instances "VRControl") "VR")]
-      (do
+      (let [omt (ru.igis.omtab.OpenMapTab/getOpenMapTab)]
         (ClojureTab/invoke "nmea.server" "start-camera-control" vrc)
         (println "3. Start NMEA server..")
-        (ClojureTab/invoke "nmea.server" "run-server"))
+        (ClojureTab/invoke "nmea.server" "run-server")
+        (javax.swing.JOptionPane/showMessageDialog omt 
+           "Initialization is complete.\n Click the \"Camera Control\" button\n and follow the instructions."))
       (println "  Annotated with \"VR\" instance of VRControl not found!")))
   (println "  Annotated with \"VR\" instance of WorkingPrograms not found!")))
 

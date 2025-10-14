@@ -8,8 +8,8 @@
  edu.stanford.smi.protege.model.Instance
  clojuretab.ClojureTab
  clojuretab.ProgramGenerator))
-(def ^:dynamic *prj* (.getCurrentProject (ProjectManager/getProjectManager)))
-(def ^:dynamic *kb* (.getKnowledgeBase *prj*))
+(def ^:dynamic *kb* nil)
+(def ^:dynamic *prj* nil)
 (def SEP ProgramGenerator/FILE_SEPARATOR)
 (defn ins [name]
   (.getInstance *kb* name))
@@ -339,4 +339,12 @@ s)
 (defn clear-cls [cls-name]
   (doseq [i (cls-instances cls-name)]
   (delin i)))
+
+(defn init-protege []
+  (when (nil? *prj*)
+  (def ^:dynamic *prj*  (.getCurrentProject (ProjectManager/getProjectManager)))
+  (def ^:dynamic *kb* (.getKnowledgeBase *prj*))
+  (println "Protege project and KB initialized.")
+  (println *prj*)
+  (println *kb*)))
 

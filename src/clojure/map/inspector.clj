@@ -10,10 +10,9 @@
   com.bbn.openmap.omGraphics.OMPoly
   com.bbn.openmap.omGraphics.OMGraphicList
   edu.stanford.smi.protege.util.SelectionListener))
-(def ^:dynamic *mb* ; MapBean
-(OpenMapTab/getMapBean))
+(def ^:dynamic *mb* nil)
 (def ^:dynamic *mem* [])
-(def ^:dynamic *inspector* (.createRuntimeClsWidget *prj* (foc "MInspector" "title" "Map Inspector")))
+(def ^:dynamic *inspector* nil)
 (defn gem [i]
   (if (< i (.size *mem*))
     (nth *mem* i)))
@@ -132,6 +131,9 @@
 
 (defn new-inspector []
   (del-m-polygons-and-layers)
+(if (nil? *mb*) (^:dynamic *mb* (OpenMapTab/getMapBean)))
+(if (nil? *inspector*) (^:dynamic *inspector* (.createRuntimeClsWidget *prj* 
+                                               (foc "MInspector" "title" "Map Inspector"))))
 (def ^:dynamic *mem* [])
 (let [lsw (isw "m-layers")
        psw (isw "m-polygons")]

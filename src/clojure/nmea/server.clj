@@ -173,15 +173,16 @@
             name  (bmp 'name) 
             crs (int (/ (bmp 'cog) 10))
             spd (round-sog (bmp 'sog))]
-      (create-or-update-mo name lat lon crs spd)
-      (rete/assert-frame ['BOAT 
-        'name name
-        'lat lat
-        'lon lon
-        'crs crs
-        'spd spd
-        'time time
-        'imo imo]))
+      (when (seq name)
+        (create-or-update-mo name lat lon crs spd)
+        (rete/assert-frame ['BOAT 
+          'name name
+          'lat lat
+          'lon lon
+          'crs crs
+          'spd spd
+          'time time
+          'imo imo])))
     (catch Exception e
       (println "Corrupted or incomplete information:")
       (println "  " :BMP bmp)))))
@@ -213,12 +214,18 @@
 
 (defn go-onboard [hm inst]
   (println :go-onboard)
-(let [sel (DisplayUtilities/pickInstanceFromCollection 
-                nil (cls-instances "FLEET") 0 "Select Boat")]
-  (when sel
-    (ssv inst "onboard-boat" (sv sel "label"))
-    (println  (sv sel "label"))
-    (rr/modify-instances [inst]))))
+(let [flt (sort-by #(sv % "label") (cls-instances "FLEET"))
+        sel (DisplayUtilities/pickInstanceFromCollection 
+                nil flt 0 "Select Boat")]
+  (if sel
+    (let [lab (sv sel "label")
+            mo (OMT/getMapOb lab)
+            mb (OpenMapTab/getMapBean)]            
+      (ssv inst "onboard-boat" lab)
+      (println  lab)
+      (.setCenter mb  (.getLatitude mo) (.getLongitude mo))
+      (.setScale mb (float 4000000))
+      (rr/modify-instances [inst])))))
 
 (defn update-mo [name lat lon crs spd]
   (when-let [mo (and name (OMT/getMapOb name))]
@@ -258,8 +265,14 @@
           (do
             (rr/assert-instances [vrc])
             (println "4. Start Clock..")
+            (OMT/setTimerRunning true)
             (clock/start-clock))
           (println "  Annotated with \"VR\" instance of VRControl not found!")))))))
+
+(defn stop-vr-plugin []
+  (clock/stop-clock)
+(doseq [i (cls-instances "FLEET")]
+  (delin i)))
 
 (defn start-camera-control [ins]
   (if-let [cmp (get-camera-panel)]
@@ -282,7 +295,7 @@
                         (actionPerformed [evt]
                           (condp = (.getActionCommand evt)
                             "start" (restart-vr-plugin)
-                            "stop" (clock/stop-clock)
+                            "stop" (stop-vr-plugin)
                             "action" (if-let [vrc (fainst (cls-instances "VRControl") "VR")]
                                                (go-onboard nil vrc)))))]
     (.setRosetteHandler cmp rosh)

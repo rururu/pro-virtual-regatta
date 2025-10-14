@@ -1,4 +1,4 @@
-; Wed Jun 14 21:44:21 MSK 2023
+; Tue Oct 14 21:40:58 MSK 2025
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -15,7 +15,7 @@
 
 ([Functional_Class10085] of  CloFunction
 
-	(source "(del-m-polygons-and-layers)\n(def ^:dynamic *mem* [])\n(let [lsw (isw \"m-layers\")\n       psw (isw \"m-polygons\")]\n  (add-sel-fn0 lsw select-layer)\n  (add-sel-fn0 psw select-polygon)\n  (.setValues lsw (map foc-m-layer  (.getComponents *mb*)))\n  (show *inspector*))")
+	(source "(del-m-polygons-and-layers)\n(if (nil? *mb*) (^:dynamic *mb* (OpenMapTab/getMapBean)))\n(if (nil? *inspector*) (^:dynamic *inspector* (.createRuntimeClsWidget *prj* \n                                               (foc \"MInspector\" \"title\" \"Map Inspector\"))))\n(def ^:dynamic *mem* [])\n(let [lsw (isw \"m-layers\")\n       psw (isw \"m-polygons\")]\n  (add-sel-fn0 lsw select-layer)\n  (add-sel-fn0 psw select-polygon)\n  (.setValues lsw (map foc-m-layer  (.getComponents *mb*)))\n  (show *inspector*))")
 	(title "new-inspector []"))
 
 ([Functional_Class10089] of  CloFunction
@@ -44,7 +44,7 @@
 
 ([Functional_Class10105] of  CloVar
 
-	(source "(.createRuntimeClsWidget *prj* (foc \"MInspector\" \"title\" \"Map Inspector\"))")
+	(source "nil")
 	(title "^:dynamic *inspector*"))
 
 ([Functional_Class10106] of  CloFunction
@@ -59,7 +59,7 @@
 
 ([Functional_Class10108] of  CloVar
 
-	(source "; MapBean\n(OpenMapTab/getMapBean)")
+	(source "nil")
 	(title "^:dynamic *mb*"))
 
 ([Functional_Class10109] of  CloFunction
