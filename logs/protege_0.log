@@ -1383,3 +1383,18 @@ but this program performed an operation which requires it,
 2025.10.14 21:44:51.388 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
 2025.10.14 21:44:51.389 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
 2025.10.14 21:44:52.999 MSK INFO: Load time for file:/home/ru/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.15 10:11:00.926 MSK INFO: *** SYSTEM START ***
+2025.10.15 10:11:02.735 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.15 10:11:03.698 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.15 10:11:03.699 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.15 10:11:05.009 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.15 10:23:16.898 MSK INFO: *** SYSTEM START ***
+2025.10.15 10:23:17.831 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.15 10:23:18.906 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.15 10:23:18.907 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.15 10:23:20.137 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.15 11:10:02.015 MSK INFO: *** SYSTEM START ***
+2025.10.15 11:10:02.842 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.15 11:10:03.840 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.15 11:10:03.840 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.15 11:10:04.945 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
