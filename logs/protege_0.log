@@ -1398,3 +1398,13 @@ but this program performed an operation which requires it,
 2025.10.15 11:10:03.840 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
 2025.10.15 11:10:03.840 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
 2025.10.15 11:10:04.945 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 1 sec (ui) -- ProjectManager$3.run()
+2025.10.15 20:07:06.944 MSK INFO: *** SYSTEM START ***
+2025.10.15 20:07:08.822 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.15 20:07:10.227 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.15 20:07:10.227 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.15 20:07:13.014 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 1 sec (project) + 2 sec (ui) -- ProjectManager$3.run()
+2025.10.16 20:27:40.745 MSK INFO: *** SYSTEM START ***
+2025.10.16 20:27:42.528 MSK WARNING: missing bundle: protege_text -- BundleHelper.<init>()
+2025.10.16 20:27:43.660 MSK WARNING: missing bundle: standard_extensions_text -- BundleHelper.<init>()
+2025.10.16 20:27:43.661 MSK WARNING: no resource bundle: tab.queries -- BundleHelper.internalGetText()
+2025.10.16 20:27:46.243 MSK INFO: Load time for file:/Users/mac/clojure/pro-virtual-regatta/pprj_examples/VirtualRegatta.pprj = 0 sec (project) + 2 sec (ui) -- ProjectManager$3.run()
