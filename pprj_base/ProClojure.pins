@@ -1,4 +1,4 @@
-; Tue Oct 14 21:42:50 MSK 2025
+; Sun Oct 19 21:21:05 MSK 2025
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -50,11 +50,11 @@
 		[Clojure_Class320000]
 		[Clojure_Class330000]
 		[Clojure_Class340001]
-		[Clojure_Class310000]
 		[Clojure_Class310001]
 		[ProClojure_Class0]
 		[ProClojure_Class10001]
 		[ProClojure_Class1]
+		[Clojure_Class310000]
 		[ProClojure_Class20004]
 		[ProClojure_Class20005]
 		[ProClojure_Class10000]
@@ -64,9 +64,9 @@
 		[ProClojure_Class40000])
 	(cloNamespace [Clojure_Class9])
 	(cloVars
+		[ProClojure_Class10002]
 		[Clojure_Class11]
-		[Clojure_Class10]
-		[ProClojure_Class10002])
+		[Clojure_Class10])
 	(title "Protege"))
 
 ([Clojure_Class100000] of  CloFunction
@@ -427,8 +427,8 @@
 
 ([ProClojure_Class10002] of  CloVar
 
-	(source "ProgramGenerator/FILE_SEPARATOR")
-	(title "SEP"))
+	(source "(do (println \"PROTEGE LOAD\")\n(defonce SEP ProgramGenerator/FILE_SEPARATOR))")
+	(title "defonceSEP"))
 
 ([ProClojure_Class20000] of  CloFunction
 
@@ -485,5 +485,5 @@
 
 ([ProClojure_Class40000] of  CloFunction
 
-	(source "(when (nil? *prj*)\n  (def ^:dynamic *prj*  (.getCurrentProject (ProjectManager/getProjectManager)))\n  (def ^:dynamic *kb* (.getKnowledgeBase *prj*))\n  (println \"Protege project and KB initialized.\")\n  (println *prj*)\n  (println *kb*))")
+	(source "(when (or (nil? *prj*)(nil? *kb*))\n  (alter-var-root #'*prj* (fn [_] (.getCurrentProject (ProjectManager/getProjectManager))))\n  (alter-var-root #'*kb* (fn [_] (.getKnowledgeBase *prj*)))\n  (println \"Protege project and KB initialized.\")\n  (println *prj*)\n  (println *kb*))")
 	(title "init-protege []"))

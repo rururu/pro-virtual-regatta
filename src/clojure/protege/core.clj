@@ -8,9 +8,10 @@
  edu.stanford.smi.protege.model.Instance
  clojuretab.ClojureTab
  clojuretab.ProgramGenerator))
+(def defonceSEP (do (println "PROTEGE LOAD")
+(defonce SEP ProgramGenerator/FILE_SEPARATOR)))
 (def ^:dynamic *kb* nil)
 (def ^:dynamic *prj* nil)
-(def SEP ProgramGenerator/FILE_SEPARATOR)
 (defn ins [name]
   (.getInstance *kb* name))
 
@@ -285,9 +286,6 @@ s)
     (doseq [pm pms]
       (println (str (if (ldns (sv pm "cloNamespace")) " + " " - ") (sv pm "title")))))))
 
-(defn has-typ [instance name]
-  (.hasType instance (cls name)))
-
 (defn collect-along [instance slot-path]
   (loop [ii [instance] ss slot-path]
   (if (seq ss)
@@ -321,6 +319,9 @@ s)
   (.close fwr)
   (ldns nsi)))
 
+(defn has-typ [instance name]
+  (.hasType instance (cls name)))
+
 (defn load-clodoc [hm inst]
   (ssv inst "source" (slurp (sv inst "path"))))
 
@@ -341,9 +342,9 @@ s)
   (delin i)))
 
 (defn init-protege []
-  (when (nil? *prj*)
-  (def ^:dynamic *prj*  (.getCurrentProject (ProjectManager/getProjectManager)))
-  (def ^:dynamic *kb* (.getKnowledgeBase *prj*))
+  (when (or (nil? *prj*)(nil? *kb*))
+  (alter-var-root #'*prj* (fn [_] (.getCurrentProject (ProjectManager/getProjectManager))))
+  (alter-var-root #'*kb* (fn [_] (.getKnowledgeBase *prj*)))
   (println "Protege project and KB initialized.")
   (println *prj*)
   (println *kb*)))

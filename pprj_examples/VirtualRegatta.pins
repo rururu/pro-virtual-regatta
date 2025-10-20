@@ -1,4 +1,4 @@
-; Tue Oct 14 21:50:49 MSK 2025
+; Mon Oct 20 12:30:35 MSK 2025
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -170,7 +170,7 @@
 
 ([VirtualRegatta_Class110000] of  CloFunction
 
-	(source "(let [[vrt lat lon spd crs date :as bot] boat]\n  (when (> (count bot) 2)\n    (rete/assert-frame ['MYBOAT \n      'lat lat\n      'lon lon\n      'crs (int crs)\n      'spd spd\n      'date date\n      'time sec])))")
+	(source "(init-protege)\n(let [[vrt lat lon spd crs date :as bot] boat]\n  (when (> (count bot) 2)\n    (rete/assert-frame ['MYBOAT \n      'lat lat\n      'lon lon\n      'crs (int crs)\n      'spd spd\n      'date date\n      'time sec])))")
 	(title "assert-my-boat [boat sec]"))
 
 ([VirtualRegatta_Class110002] of  CloFuncall
@@ -191,7 +191,7 @@
 
 ([VirtualRegatta_Class130000] of  CloFunction
 
-	(source "(if-let [cmp (get-camera-panel)]\n  (let [rosh (proxy [RosetteHandler] []\n                      (rosetteDirection [dir]\n                        (ssv ins \"camera-heading\" dir)\n                        (rr/modify-instances [ins])\n                        dir))\n           spih (proxy [SpinnerHandler] []\n                      (spinnerValue [ttt val]\n                        (condp = ttt\n                          \"heading\" (ssv ins \"camera-heading\" val)\n                          \"altitude\" (ssv ins \"camera-altitude\" val)\n                          \"altitude power\" (ssv ins \"cam-alt-power\" val)\n                          \"tilt\" (ssv ins \"camera-tilt\" val)\n                          \"range\" (ssv ins \"camera-range\" val))\n                        (rr/modify-instances [ins])\n                        val))\n           addh (proxy [AddonListener] []\n                        (actionPerformed [evt]\n                          (condp = (.getActionCommand evt)\n                            \"start\" (restart-vr-plugin)\n                            \"stop\" (stop-vr-plugin)\n                            \"action\" (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n                                               (go-onboard nil vrc)))))]\n    (.setRosetteHandler cmp rosh)\n    (.setSpinnerHandler cmp spih)\n    (.setAddonListener cmp addh)\n    (println \"Camera Control started..\"))\n  (println \"CameraPanel not found!\"))")
+	(source "(if-let [cmp (get-camera-panel)]\n  (let [rosh (proxy [RosetteHandler] []\n                      (rosetteDirection [dir]\n                        (ssv ins \"camera-heading\" dir)\n                        (rr/modify-instances [ins])\n                        dir))\n           spih (proxy [SpinnerHandler] []\n                      (spinnerValue [ttt val]\n                        (condp = ttt\n                          \"heading\" (ssv ins \"camera-heading\" val)\n                          \"altitude\" (ssv ins \"camera-altitude\" val)\n                          \"altitude power\" (ssv ins \"cam-alt-power\" val)\n                          \"tilt\" (ssv ins \"camera-tilt\" val)\n                          \"range\" (ssv ins \"camera-range\" val))\n                        (rr/modify-instances [ins])\n                        val))\n           addh (proxy [AddonListener] []\n                        (actionPerformed [evt]\n                          (condp = (.getActionCommand evt)\n                            \"start\" (start-vr-plugin)\n                            \"stop\" (stop-vr-plugin)\n                            \"action\" (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n                                               (go-onboard nil vrc)))))]\n    (.setRosetteHandler cmp rosh)\n    (.setSpinnerHandler cmp spih)\n    (.setAddonListener cmp addh)\n    (println \"Camera Control started..\"))\n  (println \"CameraPanel not found!\"))")
 	(title "start-camera-control [ins]"))
 
 ([VirtualRegatta_Class130001] of  CloFunction
@@ -326,7 +326,6 @@
 	(camera-tilt 80)
 	(fleet-interval 120)
 	(myboat-interval 4)
-	(myboat-name "russor")
 	(onboard-boat "russor")
 	(status "RUN")
 	(title "VR Plugin Control"))
@@ -350,8 +349,8 @@
 
 ([VirtualRegatta_Class210000] of  CloFunction
 
-	(source "(println \"RESTART VR PLUGIN\")\n(clock/stop-clock)\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do\n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins)) ))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Expert System..\")\n    (if-let [run (ClojureTab/findAnnotated (cls-instances \"Run\") \"VR\")]\n      (do\n        (ClojureTab/invoke \"ru.rules\" \"run-engine\" run)\n        (println \"3. Assert VR Control..\")\n        (if-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n          (do\n            (rr/assert-instances [vrc])\n            (println \"4. Start Clock..\")\n            (OMT/setTimerRunning true)\n            (clock/start-clock))\n          (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\"))))))")
-	(title "restart-vr-plugin []"))
+	(source "(println \"START VR PLUGIN\")\n(clock/stop-clock)\n(init-protege)\n(println \"1. Start Expert System..\")\n(if-let [run (fainst (cls-instances \"Run\") \"VR\")]\n  (do\n    (rr/run-engine run)\n    (println \"2. Assert VR Control..\")\n    (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n      (when-let [name (DisplayUtilities/editString nil \"Your boat\" (sv vrc \"myboat-name\") nil)]\n        (ssv vrc \"myboat-name\" name)\n        (rr/assert-instances [vrc])\n        (println \"3. Start Clock..\")\n        (OMT/setTimerRunning true)\n        (clock/start-clock))\n      (println \"  Annotated with VR instance of VRControl not found!\"))))")
+	(title "start-vr-plugin []"))
 
 ([VirtualRegatta_Class210001] of  CloFuncall
 )
@@ -382,6 +381,10 @@
 
 	(source "(if-let [mo (OMT/getMapOb lab)]\n  (let [url (URL. url)\n          imi (ImageIcon. url)\n          lm (.getLocationMarker mo)]\n    (.setImageIcon lm imi)))")
 	(title "set-mo-image [lab url]"))
+
+([VirtualRegatta_Class230001] of  CloFuncall
+
+	(source "(init-protege)"))
 
 ([VirtualRegatta_Class230004] of  CloFuncall
 
@@ -460,14 +463,6 @@
 ([VirtualRegatta_Class250051] of  CloFuncall
 
 	(source "*kb*"))
-
-([VirtualRegatta_Class250052] of  CloFuncall
-
-	(source "*prj*"))
-
-([VirtualRegatta_Class250053] of  CloFuncall
-
-	(source "(alter-var-root #'*prj* (fn [_] (force *prj*)))"))
 
 ([VirtualRegatta_Class30000] of  MInspector
 
@@ -585,7 +580,7 @@
 
 ([VirtualRegatta_Class80000] of  CloFunction
 
-	(source "(println \"START VR PLUGIN\")\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (ClojureTab/findAnnotated (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do \n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins))))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Camera..\")\n    (if-let [vrc (ClojureTab/findAnnotated (cls-instances \"VRControl\") \"VR\")]\n      (let [omt (ru.igis.omtab.OpenMapTab/getOpenMapTab)]\n        (ClojureTab/invoke \"nmea.server\" \"start-camera-control\" vrc)\n        (println \"3. Start NMEA server..\")\n        (ClojureTab/invoke \"nmea.server\" \"run-server\")\n        (javax.swing.JOptionPane/showMessageDialog omt \n           \"Initialization is complete.\\n Click the \\\"Camera Control\\\" button\\n and follow the instructions.\"))\n      (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\")))\n  (println \"  Annotated with \\\"VR\\\" instance of WorkingPrograms not found!\"))")
+	(source "(println \"INIT VR PLUGIN\")\n(init-protege)\n(println \"1. Loading Clojure Programs..\")\n(if-let [wps (fainst (cls-instances \"WorkingPrograms\") \"VR\")]\n  (do \n    (loop [i 1 pins (svs wps \"cloPrograms\")]\n      (when (seq pins)\n        (println (str \" 1.\" i \" \" (sv (first pins) \"title\") \" = \" (ClojureTab/loadProgram (first pins))))\n        (recur (inc i) (rest pins))))\n    (println \"2. Start Camera..\")\n    (if-let [vrc (fainst (cls-instances \"VRControl\") \"VR\")]\n      (let [omt (ru.igis.omtab.OpenMapTab/getOpenMapTab)]\n        (ClojureTab/invoke \"nmea.server\" \"start-camera-control\" vrc)\n        (println \"3. Start NMEA server..\")\n        (ClojureTab/invoke \"nmea.server\" \"run-server\")\n        (javax.swing.JOptionPane/showMessageDialog\n           (ru.igis.omtab.OpenMapTab/getOpenMapTab)\n           \"<html><h3>Initialization is complete.</h3>\n              Click the \\\"Camera Control\\\" button<br>\n              and follow the instructions.\"))\n      (println \"  Annotated with \\\"VR\\\" instance of VRControl not found!\")))\n  (println \"  Annotated with \\\"VR\\\" instance of WorkingPrograms not found!\"))")
 	(title "clojure-work []"))
 
 ([VirtualRegatta_Class80001] of  CloProgram
@@ -629,7 +624,7 @@
 
 ([VirtualRegatta_Class90025] of  CloFunction
 
-	(source "(let [nn (for [[imo bmp] flmp] (bmp 'name))]\n  (doseq [i (cls-instances \"FLEET\")]\n    (let [lab (sv i \"label\")]\n      (if (not (or (some #{lab} nn) myb))\n        (OMT/removeMapOb i true)))))")
+	(source "(init-protege)\n(let [nn (for [[imo bmp] flmp] (bmp 'name))]\n  (doseq [i (cls-instances \"FLEET\")]\n    (let [lab (sv i \"label\")]\n      (if (not (or (some #{lab} nn) myb))\n        (OMT/removeMapOb i true)))))")
 	(title "remove-fleet-boats [flmp myb]"))
 
 ([VirtualRegatta_Class90034] of  CloVar

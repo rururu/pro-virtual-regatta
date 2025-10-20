@@ -47,10 +47,12 @@ $ ./run.sh       # Linux, MacOS
 $ run.bat        # Windows
 ```
 7. Once initialization is complete, open the camera control using the corresponding button on the opened Protege GUI.
-8. Start Google Earth program.
-9. Open Google Earth View -> Sidebar (if needed).
-10. Open <..>/pro-virtual-regatta/LinkToCamera.kml file.
-11. Open <..>/pro-virtual-regatta/LinkToFleet.kml file.
+8. Start simulation with "Start" button on Camera Control.
+9. Input or confirm a name of your boat.
+10. Start Google Earth program.
+11. Open Google Earth View -> Sidebar (if needed).
+12. Open <..>/pro-virtual-regatta/LinkToCamera.kml file.
+13. Open <..>/pro-virtual-regatta/LinkToFleet.kml file.
 
 
 ## Video Lesson

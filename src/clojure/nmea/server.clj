@@ -188,7 +188,8 @@
       (println "  " :BMP bmp)))))
 
 (defn assert-my-boat [boat sec]
-  (let [[vrt lat lon spd crs date :as bot] boat]
+  (init-protege)
+(let [[vrt lat lon spd crs date :as bot] boat]
   (when (> (count bot) 2)
     (rete/assert-frame ['MYBOAT 
       'lat lat
@@ -199,7 +200,8 @@
       'time sec]))))
 
 (defn remove-fleet-boats [flmp myb]
-  (let [nn (for [[imo bmp] flmp] (bmp 'name))]
+  (init-protege)
+(let [nn (for [[imo bmp] flmp] (bmp 'name))]
   (doseq [i (cls-instances "FLEET")]
     (let [lab (sv i "label")]
       (if (not (or (some #{lab} nn) myb))
@@ -246,28 +248,23 @@
   (if-let [cmp (Util/getComponentOfClass omt "ru.igis.omtab.ext.CameraPanel")]
     cmp)))
 
-(defn restart-vr-plugin []
-  (println "RESTART VR PLUGIN")
+(defn start-vr-plugin []
+  (println "START VR PLUGIN")
 (clock/stop-clock)
-(println "1. Loading Clojure Programs..")
-(if-let [wps (ClojureTab/findAnnotated (cls-instances "WorkingPrograms") "VR")]
+(init-protege)
+(println "1. Start Expert System..")
+(if-let [run (fainst (cls-instances "Run") "VR")]
   (do
-    (loop [i 1 pins (svs wps "cloPrograms")]
-      (when (seq pins)
-        (println (str " 1." i " " (sv (first pins) "title") " = " (ClojureTab/loadProgram (first pins)) ))
-        (recur (inc i) (rest pins))))
-    (println "2. Start Expert System..")
-    (if-let [run (ClojureTab/findAnnotated (cls-instances "Run") "VR")]
-      (do
-        (ClojureTab/invoke "ru.rules" "run-engine" run)
-        (println "3. Assert VR Control..")
-        (if-let [vrc (ClojureTab/findAnnotated (cls-instances "VRControl") "VR")]
-          (do
-            (rr/assert-instances [vrc])
-            (println "4. Start Clock..")
-            (OMT/setTimerRunning true)
-            (clock/start-clock))
-          (println "  Annotated with \"VR\" instance of VRControl not found!")))))))
+    (rr/run-engine run)
+    (println "2. Assert VR Control..")
+    (if-let [vrc (fainst (cls-instances "VRControl") "VR")]
+      (when-let [name (DisplayUtilities/editString nil "Your boat" (sv vrc "myboat-name") nil)]
+        (ssv vrc "myboat-name" name)
+        (rr/assert-instances [vrc])
+        (println "3. Start Clock..")
+        (OMT/setTimerRunning true)
+        (clock/start-clock))
+      (println "  Annotated with VR instance of VRControl not found!")))))
 
 (defn stop-vr-plugin []
   (clock/stop-clock)
@@ -294,7 +291,7 @@
            addh (proxy [AddonListener] []
                         (actionPerformed [evt]
                           (condp = (.getActionCommand evt)
-                            "start" (restart-vr-plugin)
+                            "start" (start-vr-plugin)
                             "stop" (stop-vr-plugin)
                             "action" (if-let [vrc (fainst (cls-instances "VRControl") "VR")]
                                                (go-onboard nil vrc)))))]

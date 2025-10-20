@@ -2,4 +2,4 @@
 
 cd $(dirname $0)
 
-clj -J-Xmx500M -M run/protege_gui.clj
+clj -J-Dswing.defaultlaf=com.formdev.flatlaf.FlatLightLaf -J-Xmx500M -M run/protege_gui.clj

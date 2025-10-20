@@ -23,7 +23,8 @@
                      [ring/ring-jetty-adapter "1.14.2"]
                      [ring/ring-defaults "0.7.0"]
                      [compojure/compojure "1.7.1"]
-                     [http-kit/http-kit "2.8.1"]]
+                     [http-kit/http-kit "2.8.1"]
+                     [com.formdev/flatlaf "3.6.2"]]
       :repositories {"local" ~(str (.toURI (java.io.File. "repo"))) :checksum :warn}
       :main ^:skip-aot virtual-regatta.core
       :target-path "target/%s"
